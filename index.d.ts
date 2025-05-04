@@ -11,7 +11,7 @@ type MediaFile = {
 }
 
 type SocialLink = {
-  image?: MediaFile
+  icon?: string
   link?: string
   title?: string
 }
@@ -24,11 +24,11 @@ type HeroSection = {
   subtitle?: string
   ctaText?: string
   ctaLink?: string
-  backgroundImage?: string
+  backgroundImage?: MediaFile
 }
 
 type ServiceItem = {
-  icon?: string
+  icon?: MediaFile
   title?: string
   description?: string
   link?: string
