@@ -71,11 +71,12 @@ type SkillItem = {
 
 type ClientsSection = {
   title?: string
-  stats?: {
-    count?: number
-    label?: string
-  }
+  // stats?: {
+  //   count?: number
+  //   label?: string
+  // }
   logos?: {
+    // brand logos
     image?: MediaFile
     link?: string
   }[]

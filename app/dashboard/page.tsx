@@ -1,4 +1,5 @@
 import About from '@/components/dashboard/About'
+import Clients from '@/components/dashboard/Clients'
 import Hero from '@/components/dashboard/Hero'
 import Logo from '@/components/dashboard/Logo'
 import Services from '@/components/dashboard/Services'
@@ -41,6 +42,13 @@ export default async function DashboardPage() {
         <Card>
           <CardContent>
             <About data={data.data.about} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='clients'>
+        <Card>
+          <CardContent>
+            <Clients data={data.data.clients} />
           </CardContent>
         </Card>
       </div>

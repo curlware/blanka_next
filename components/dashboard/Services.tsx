@@ -211,7 +211,10 @@ export default function Services({ data }: TProps) {
             </div>
 
             {fields.map((field, index) => (
-              <Card key={field._id} className='p-4 relative border border-gray-200'>
+              <Card
+                key={field._id}
+                className='p-4 relative border border-gray-200 hover:border-black'
+              >
                 <div className='absolute top-4 right-4'>
                   <Button
                     type='button'
