@@ -8,18 +8,15 @@ type TProps = {
 }
 
 export default function ServiceSection({ data = {} }: TProps) {
-    console.log('data :>> ', data);
     const { title, subtitle, items } = data
-
-    // const bg = backgroundImage ? `bg-[url(${backgroundImage?.file})]` : 'bg-primary/90'
     return (
         <section
             className={cn("relative flex justify-center items-center bg-contain bg-scroll bg-bottom py-20 bg-[url('/images/service-bg.png')] bg-no-repeat bg-white pb-40")}
         >
-            <div className="space-y-12 mx-auto container">
+            <div className="space-y-12 mx-auto max-w-6xl container">
                 <SectionHeading title={title} subtitle={subtitle} />
 
-                <div className="gap-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto pb-2 max-w-6xl">
+                <div className="gap-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-2">
                     {items?.map((item, index) => (
                         <FadeUp delay={0.1 * index} duration={0.3 * index} key={index} className="group relative flex flex-col justify-center space-y-4 bg-white p-16 border hover:border-secondary-foreground/60 border-transparent rounded-4xl text-center transition-all duration-500 ease-in-out transform">
                             <img src={item?.icon?.file} alt={item?.title} className="mx-auto" />
