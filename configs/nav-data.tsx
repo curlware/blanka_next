@@ -123,10 +123,24 @@ export const siteConfig = {
     {
       title: 'Privacy Policy',
       href: '/privacy'
+    }
+  ],
+  socialNav: [
+    {
+      title: 'Facebook',
+      href: 'https://www.facebook.com'
     },
     {
-      title: 'Terms of Service',
-      href: '/terms'
+      title: 'Twitter',
+      href: 'https://www.twitter.com'
+    },
+    {
+      title: 'Instagram',
+      href: 'https://www.instagram.com'
+    },
+    {
+      title: 'LinkedIn',
+      href: 'https://www.linkedin.com'
     }
   ]
 }
