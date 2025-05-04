@@ -3,7 +3,7 @@
 import { connectToDatabase } from '@/configs/dbConnect'
 import { defaultData } from '@/configs/reset-data'
 import SiteContent from '@/models/SiteContent'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 /**
  * Create or update the homepage content
@@ -30,6 +30,7 @@ export async function saveHomepageContent(content: SiteContentData) {
 
     // Revalidate the homepage path to update the cache
     revalidatePath('/')
+    revalidateTag('data')
 
     return {
       success: true,
@@ -93,6 +94,7 @@ export async function updateHomepageSection<T extends keyof SiteContentData>(
 
       // Revalidate the homepage path
       revalidatePath('/')
+      revalidateTag('data')
 
       return {
         success: true
@@ -131,6 +133,7 @@ export async function resetHomepageContent() {
 
     // Revalidate the homepage path to update the cache
     revalidatePath('/')
+    revalidateTag('data')
 
     return {
       success: true
