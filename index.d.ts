@@ -13,7 +13,6 @@ type MediaFile = {
 type SocialLink = {
   icon?: string
   link?: string
-  title?: string
 }
 
 // Section types

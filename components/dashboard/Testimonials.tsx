@@ -175,7 +175,10 @@ export default function Testimonials({ data }: TProps) {
           {/* Testimonials list */}
           <div className='space-y-6'>
             {fields.map((field, index) => (
-              <Card key={field._id} className='p-5 relative border border-gray-200'>
+              <Card
+                key={field._id}
+                className='p-5 relative border border-gray-200 hover:border-black'
+              >
                 <div className='absolute top-4 right-4'>
                   <Button
                     type='button'

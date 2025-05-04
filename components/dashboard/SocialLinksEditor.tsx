@@ -41,13 +41,6 @@ const SocialLinksEditor: React.FC<SocialLinksEditorProps> = ({ initialLinks = []
       // Filter out empty links
       const filteredLinks = links.filter((link) => link.network && link.link)
 
-      // Update the footer section's social links
-      //   await updateHomepageSection('footer', {
-      //     // Preserve other footer data
-      //     // ...existing footer data
-      //     socialLinks: filteredLinks
-      //   })
-
       // Show success message or notification
       console.log('Social links updated successfully', filteredLinks)
     } catch (error) {

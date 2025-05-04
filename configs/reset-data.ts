@@ -259,19 +259,19 @@ export const defaultData: SiteContentData = {
     copyright: '© 2022 Blanka WordPress Theme by CocoBasic.',
     socialLinks: [
       {
-        title: 'Twitter',
+        icon: 'Twitter',
         link: '#'
       },
       {
-        title: 'Facebook',
+        icon: 'Facebook',
         link: '#'
       },
       {
-        title: 'Instagram',
+        icon: 'Instagram',
         link: '#'
       },
       {
-        title: 'Behance',
+        icon: 'Behance',
         link: '#'
       }
     ]
