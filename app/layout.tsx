@@ -3,11 +3,19 @@ import Header from '@/components/layout/header'
 import { UserProvider } from '@/lib/auth'
 import retrieveUserFromSession from '@/utils/getUser'
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
+import { League_Script, Poppins } from 'next/font/google'
 import './globals.css'
 
-const nunito = Nunito({
-  subsets: ['latin']
+const poppins = Poppins({
+  weight: ["200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-poppins",
+})
+
+const leagueScript = League_Script({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-league-script",
 })
 
 export const metadata: Metadata = {
@@ -23,7 +31,7 @@ export default function RootLayout({
   const userPromise = retrieveUserFromSession()
   return (
     <html lang='en'>
-      <body className={`${nunito.className}`} suppressHydrationWarning>
+      <body className={`${poppins.className} ${leagueScript.variable}`} suppressHydrationWarning>
         <UserProvider userPromise={userPromise}>
           <Header />
           <main>{children}</main>
