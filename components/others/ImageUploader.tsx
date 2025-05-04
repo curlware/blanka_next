@@ -8,11 +8,13 @@ import {
   upload
 } from '@imagekit/next'
 import { useRef, useState } from 'react'
-import { Button } from '../ui/button'
-import { Progress } from '../ui/progress'
 
+type TProps = {
+  fileId?: string
+  setFile: (value: MediaFile) => void
+}
 // ImageUploader component demonstrates file uploading using ImageKit's Next.js SDK.
-const ImageUploader = () => {
+export default function ImageUploader({ fileId, setFile }: TProps) {
   // State to keep track of the current upload progress (percentage)
   const [progress, setProgress] = useState(0)
   const [lastImageUrl, setLastImageUrl] = useState('')
@@ -23,15 +25,6 @@ const ImageUploader = () => {
   // Create an AbortController instance to provide an option to cancel the upload if needed.
   const abortController = new AbortController()
 
-  /**
-   * Authenticates and retrieves the necessary upload credentials from the server.
-   *
-   * This function calls the authentication API endpoint to receive upload parameters like signature,
-   * expire time, token, and publicKey.
-   *
-   * @returns {Promise<{signature: string, expire: string, token: string, publicKey: string}>} The authentication parameters.
-   * @throws {Error} Throws an error if the authentication request fails.
-   */
   const authenticator = async () => {
     try {
       // Perform the request to the upload authentication endpoint.
@@ -53,16 +46,6 @@ const ImageUploader = () => {
     }
   }
 
-  /**
-   * Handles the file upload process.
-   *
-   * This function:
-   * - Validates file selection.
-   * - Retrieves upload authentication credentials.
-   * - Initiates the file upload via the ImageKit SDK.
-   * - Updates the upload progress.
-   * - Catches and processes errors accordingly.
-   */
   const handleUpload = async () => {
     // Access the file input element using the ref
     const fileInput = fileInputRef.current
@@ -101,8 +84,11 @@ const ImageUploader = () => {
         // Abort signal to allow cancellation of the upload if needed.
         abortSignal: abortController.signal
       })
-      console.log('Upload response:', uploadResponse)
-      setLastImageUrl(uploadResponse.fileId as string)
+      setFile({
+        file: uploadResponse.url,
+        fileId: uploadResponse.fileId,
+        thumbnail: uploadResponse.thumbnailUrl
+      })
     } catch (error) {
       // Handle specific error types provided by the ImageKit SDK.
       if (error instanceof ImageKitAbortError) {
@@ -121,40 +107,27 @@ const ImageUploader = () => {
   }
 
   const handleDeleteImage = async () => {
-    const response = await fetch(`/api/delete-image/?fileId=${lastImageUrl}`, {
-      method: 'DELETE'
-    })
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`)
+    if (fileId) {
+      if (window.confirm('Are you sure you want to delete the previous image?')) {
+        await fetch(`/api/delete-image/?fileId=${fileId}`, {
+          method: 'DELETE'
+        })
+      }
     }
-    const data = await response.json()
-    console.log('Image deleted:', data)
-    setLastImageUrl('')
+    await handleUpload()
   }
 
   return (
-    <div className='max-w-lg mx-6'>
+    <div className=''>
       {/* File input element using React ref */}
-      <div className='my-2 border-slate-300 border p-2 rounded-md shadow'>
-        <input type='file' ref={fileInputRef} />
-        {/* Button to trigger the upload process */}
-        <Button type='button' onClick={handleUpload}>
-          Upload file
-        </Button>
+      <div className='my-2 border-slate-300 border p-2  rounded-md shadow'>
+        <input type='file' ref={fileInputRef} onChange={handleDeleteImage} />
       </div>
-      {/* Display the current upload progress */}
+      {/* Display the current upload progress
       <div className='mt-4'>
         <p className='mb-2'>Upload progress:</p>
         <Progress value={progress} max={100} />
-      </div>
-      <div className='mt-4'>
-        <Button onClick={handleDeleteImage} type='button' variant='destructive'>
-          Delete last image
-        </Button>
-      </div>
+      </div> */}
     </div>
   )
 }
-
-export default ImageUploader

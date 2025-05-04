@@ -162,3 +162,9 @@ type SiteContent = {
   createdAt?: string | Date
   updatedAt?: string | Date
 }
+
+type ResponseData = {
+  success: boolean
+  data?: SiteContentData | null
+  error?: string
+}

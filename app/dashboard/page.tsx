@@ -1,17 +1,20 @@
-import { siteContentNavItems } from '@/configs/nav-data'
+import Logo from '@/components/dashboard/Logo'
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/get-data`, {
+    next: { tags: ['data'] }
+  })
+
+  const data: ResponseData = await response.json()
+  if (!data?.data) {
+    return <div>No data available</div>
+  }
+
   return (
     <div className='grid gap-4'>
-      {siteContentNavItems
-        .map((item) => item.link)
-        .map((link, idx) => (
-          <div key={idx} id={link} className='mb-2 bg-blue-100 w-full h-64'>
-            <a href={link} className=''>
-              {link}
-            </a>
-          </div>
-        ))}
+      <div id='logo'>
+        <Logo data={data.data.logo} />
+      </div>
     </div>
   )
 }

@@ -75,7 +75,10 @@ export async function getHomepageContent(): Promise<{
 /**
  * Update a specific section of the homepage content
  */
-export async function updateHomepageSection(section: string, data: any) {
+export async function updateHomepageSection<T extends keyof SiteContentData>(
+  section: T,
+  data: SiteContentData[T]
+) {
   try {
     // Connect to the database
     await connectToDatabase()
@@ -86,14 +89,13 @@ export async function updateHomepageSection(section: string, data: any) {
     if (!existingContent) {
       // Create new content with this section
       const newContent = { [section]: data }
-      const result = await SiteContent.create({ content: newContent })
+      await SiteContent.create({ content: newContent })
 
       // Revalidate the homepage path
       revalidatePath('/')
 
       return {
-        success: true,
-        data: result
+        success: true
       }
     }
 
@@ -105,8 +107,7 @@ export async function updateHomepageSection(section: string, data: any) {
     revalidatePath('/')
 
     return {
-      success: true,
-      data: existingContent
+      success: true
     }
   } catch (error: any) {
     console.error(`Error updating ${section} section:`, error)
