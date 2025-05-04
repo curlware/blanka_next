@@ -29,7 +29,7 @@ export default function Logo({ data }: TProps) {
 
   return (
     <div className='border-b border-gray-300 pb-4'>
-      <h1 className='text-lg my-8 font-semibold'>Site Logo</h1>
+      <h1 className='text-lg my-8 font-semibold lg:text-3xl'>Site Logo</h1>
       <p>Current Logo</p>
       <Image src={data?.file as string} alt='Logo' width={200} height={200} className='my-2 p-2' />
       <ImageUploader fileId={data?.fileId} setFile={setLogo} />
