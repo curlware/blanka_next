@@ -1,5 +1,6 @@
 import Hero from '@/components/dashboard/Hero'
 import Logo from '@/components/dashboard/Logo'
+import Services from '@/components/dashboard/Services'
 import { Card, CardContent } from '@/components/ui/card'
 
 export default async function DashboardPage() {
@@ -28,13 +29,12 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-      <div id='hero'>
+      <div id='services'>
         <Card>
           <CardContent>
-            <h1 className='text-lg my-8 font-semibold lg:text-3xl'>Hero Section</h1>
+            <Services data={data.data.services} />
           </CardContent>
         </Card>
-        <p>Hero section content goes here...</p>
       </div>
       <div id='footer'>
         <Card>

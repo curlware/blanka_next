@@ -77,8 +77,6 @@ export default function Hero({ data }: TProps) {
         backgroundImage: backgroundImage
       }
 
-      console.log('hero data', heroData)
-
       // Call the server action to update the hero section
       const result = await updateHomepageSection('hero', heroData)
 
@@ -97,7 +95,7 @@ export default function Hero({ data }: TProps) {
 
   return (
     <div>
-      <h1 className='text-lg font-semibold lg:text-3xl'>Hero Section</h1>
+      <h1 className='text-lg my-5 font-semibold lg:text-3xl'>Hero Section</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
