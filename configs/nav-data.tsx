@@ -1,5 +1,4 @@
 import {
-  BarChart3,
   FileText,
   Home,
   Image,
@@ -7,7 +6,6 @@ import {
   Lightbulb,
   MessageSquare,
   Phone,
-  PieChart,
   Settings,
   ShoppingBag,
   Users
@@ -29,21 +27,21 @@ export const siteContentNavItems = [
     link: 'services',
     icon: <Lightbulb className='h-4 w-4 mr-2' />
   },
-  {
-    label: 'Portfolio',
-    link: 'portfolio',
-    icon: <Image className='h-4 w-4 mr-2' />
-  },
+  // {
+  //   label: 'Portfolio',
+  //   link: 'portfolio',
+  //   icon: <Image className='h-4 w-4 mr-2' />
+  // },
   {
     label: 'About',
     link: 'about',
     icon: <FileText className='h-4 w-4 mr-2' />
   },
-  {
-    label: 'Skills',
-    link: 'skills',
-    icon: <BarChart3 className='h-4 w-4 mr-2' />
-  },
+  // {
+  //   label: 'Skills',
+  //   link: 'skills',
+  //   icon: <BarChart3 className='h-4 w-4 mr-2' />
+  // },
   {
     label: 'Clients',
     link: 'clients',
@@ -59,11 +57,11 @@ export const siteContentNavItems = [
     link: 'team',
     icon: <Users className='h-4 w-4 mr-2' />
   },
-  {
-    label: 'Pricing',
-    link: 'pricing',
-    icon: <PieChart className='h-4 w-4 mr-2' />
-  },
+  // {
+  //   label: 'Pricing',
+  //   link: 'pricing',
+  //   icon: <PieChart className='h-4 w-4 mr-2' />
+  // },
   {
     label: 'Contact',
     link: 'contact',

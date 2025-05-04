@@ -163,7 +163,13 @@ export default function Clients({ data }: TProps) {
           <div className='space-y-4'>
             <div className='flex justify-between items-center'>
               <h2 className='text-lg font-medium'>Client Logos</h2>
-              <Button type='button' onClick={addClientLogo} variant='outline' size='sm'>
+              <Button
+                type='button'
+                onClick={addClientLogo}
+                variant='success'
+                size='sm'
+                className='cursor-pointer'
+              >
                 <Plus className='h-4 w-4 mr-2' />
                 Add Client
               </Button>

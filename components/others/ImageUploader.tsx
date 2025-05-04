@@ -120,8 +120,13 @@ export default function ImageUploader({ fileId, setFile }: TProps) {
   return (
     <div className=''>
       {/* File input element using React ref */}
-      <div className='my-2 border-slate-300 border p-2  rounded-md shadow'>
-        <input type='file' ref={fileInputRef} onChange={handleDeleteImage} />
+      <div className='my-2 border-slate-300 border p-2  rounded-md shadow overflow-hidden'>
+        <input
+          type='file'
+          ref={fileInputRef}
+          onChange={handleDeleteImage}
+          className='overflow-hidden text-xs'
+        />
       </div>
       {/* Display the current upload progress
       <div className='mt-4'>

@@ -204,7 +204,13 @@ export default function Services({ data }: TProps) {
           <div className='space-y-4'>
             <div className='flex justify-between items-center'>
               <h2 className='text-lg font-medium'>Services</h2>
-              <Button type='button' onClick={addServiceItem} variant='outline' size='sm'>
+              <Button
+                type='button'
+                onClick={addServiceItem}
+                variant='success'
+                size='sm'
+                className='cursor-pointer'
+              >
                 <Plus className='h-4 w-4 mr-2' />
                 Add Service
               </Button>
