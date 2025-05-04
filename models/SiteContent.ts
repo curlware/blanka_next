@@ -16,7 +16,11 @@ const siteContentSchema = new Schema(
         subtitle: String,
         ctaText: String,
         ctaLink: String,
-        backgroundImage: String
+        backgroundImage: {
+          thumbnail: String,
+          file: String,
+          fileId: String
+        }
       },
       // Services section
       services: {
@@ -24,7 +28,11 @@ const siteContentSchema = new Schema(
         subtitle: String,
         items: [
           {
-            icon: String,
+            icon: {
+              thumbnail: String,
+              file: String,
+              fileId: String
+            },
             title: String,
             description: String,
             link: String
@@ -32,23 +40,23 @@ const siteContentSchema = new Schema(
         ]
       },
       // Portfolio section
-      portfolio: {
-        title: String,
-        categories: [String],
-        items: [
-          {
-            title: String,
-            subTitle: String,
-            category: String,
-            image: {
-              thumbnail: String,
-              file: String,
-              fileId: String
-            },
-            link: String
-          }
-        ]
-      },
+      // portfolio: {
+      //   title: String,
+      //   categories: [String],
+      //   items: [
+      //     {
+      //       title: String,
+      //       subTitle: String,
+      //       category: String,
+      //       image: {
+      //         thumbnail: String,
+      //         file: String,
+      //         fileId: String
+      //       },
+      //       link: String
+      //     }
+      //   ]
+      // },
       // About section
       about: {
         title: String,
@@ -73,10 +81,10 @@ const siteContentSchema = new Schema(
       // Clients section
       clients: {
         title: String,
-        stats: {
-          count: Number,
-          label: String
-        },
+        // stats: {
+        //   count: Number,
+        //   label: String
+        // },
         logos: [
           {
             image: {
@@ -119,11 +127,7 @@ const siteContentSchema = new Schema(
             bio: String,
             socialLinks: [
               {
-                image: {
-                  thumbnail: String,
-                  file: String,
-                  fileId: String
-                },
+                icon: String,
                 link: String
               }
             ]
@@ -131,20 +135,20 @@ const siteContentSchema = new Schema(
         ]
       },
       // Pricing section
-      pricing: {
-        title: String,
-        subtitle: String,
-        plans: [
-          {
-            name: String,
-            price: Number,
-            period: String,
-            features: [String],
-            ctaText: String,
-            ctaLink: String
-          }
-        ]
-      },
+      // pricing: {
+      //   title: String,
+      //   subtitle: String,
+      //   plans: [
+      //     {
+      //       name: String,
+      //       price: Number,
+      //       period: String,
+      //       features: [String],
+      //       ctaText: String,
+      //       ctaLink: String
+      //     }
+      //   ]
+      // },
       // Contact section
       contact: {
         title: String,
