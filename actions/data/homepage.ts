@@ -1,6 +1,7 @@
 'use server'
 
 import { connectToDatabase } from '@/configs/dbConnect'
+import { defaultData } from '@/configs/reset-data'
 import SiteContent from '@/models/SiteContent'
 import { revalidatePath } from 'next/cache'
 
@@ -116,7 +117,7 @@ export async function updateHomepageSection(section: string, data: any) {
   }
 }
 
-export async function resetHomepageContent(content: SiteContentData) {
+export async function resetHomepageContent() {
   try {
     // Connect to the database
     await connectToDatabase()
@@ -125,14 +126,13 @@ export async function resetHomepageContent(content: SiteContentData) {
     await SiteContent.deleteMany({})
 
     // Create new content
-    const result = await SiteContent.create({ content })
+    await SiteContent.create({ content: defaultData })
 
     // Revalidate the homepage path to update the cache
     revalidatePath('/')
 
     return {
-      success: true,
-      data: result
+      success: true
     }
   } catch (error: any) {
     console.error('Error saving homepage content:', error)

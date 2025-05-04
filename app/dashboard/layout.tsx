@@ -1,9 +1,11 @@
 'use client'
 
+import { handleResetData } from '@/components/others/resetData'
 import NavSheet from '@/components/shared/nav-sheet'
 import { adminNavItems } from '@/configs/nav-data'
 import { cn } from '@/lib/utils'
 import { scrollToElement } from '@/utils/scrollTo'
+import { Undo2 } from 'lucide-react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -102,6 +104,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className='flex-1 overflow-y-auto py-5'>
             <nav className='px-3 space-y-1'>
               {renderadminNavItems(adminNavItems, currentHash, setCurrentHash)}
+              <button
+                onClick={handleResetData}
+                className={cn(
+                  'flex items-center w-full cursor-pointer gap-2 px-3 py-2 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:bg-accent hover:text-foreground'
+                )}
+              >
+                <Undo2 className='size-5' />
+                Reset all data
+              </button>
             </nav>
           </div>
           <div className='px-6 py-4 border-t'>

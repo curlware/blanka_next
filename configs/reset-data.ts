@@ -1,4 +1,4 @@
-const defaultData: SiteContentData = {
+export const defaultData: SiteContentData = {
   logo: {
     file: 'https://demo.cocobasic.com/blanka-wp/wp-content/uploads/2017/09/logo_2x.png',
     fileId: 'string',
