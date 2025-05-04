@@ -1,3 +1,5 @@
+import Footer from '@/components/layout/footer'
+import Header from '@/components/layout/header'
 import { UserProvider } from '@/lib/auth'
 import retrieveUserFromSession from '@/utils/getUser'
 import type { Metadata } from 'next'
@@ -22,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${nunito.className}`} suppressHydrationWarning>
-        <UserProvider userPromise={userPromise}>{children}</UserProvider>
+        <UserProvider userPromise={userPromise}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   )
