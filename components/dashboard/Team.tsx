@@ -227,7 +227,7 @@ const TeamMemberCard = memo(
                 <div className='mb-4 relative'>
                   <div className='border rounded-md overflow-hidden relative w-32 h-32'>
                     <Image
-                      src={memberImage.file}
+                      src={memberImage.file || '/placeholder.webp'}
                       alt={`${form.getValues().members[index].name || 'Team member'} profile`}
                       fill
                       className='object-cover'

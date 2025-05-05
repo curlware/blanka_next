@@ -172,7 +172,7 @@ export default function Hero({ data }: TProps) {
               <div className='mb-4 relative'>
                 <div className='border rounded-md overflow-hidden relative aspect-video w-full max-w-md'>
                   <Image
-                    src={backgroundImage.file}
+                    src={backgroundImage.file || '/placeholder.webp'}
                     alt='Background image preview'
                     fill
                     className='object-cover'

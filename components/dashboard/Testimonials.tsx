@@ -204,7 +204,7 @@ export default function Testimonials({ data }: TProps) {
                         <div className='mb-4 relative'>
                           <div className='border rounded-full overflow-hidden relative w-24 h-24'>
                             <Image
-                              src={testimonialImages[index]?.file || ''}
+                              src={testimonialImages[index]?.file || '/placeholder.webp'}
                               alt={`Testimonial from ${form.getValues().testimonials[index].name}`}
                               fill
                               className='object-cover'

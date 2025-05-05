@@ -216,7 +216,12 @@ export default function About({ data }: TProps) {
             {media?.file && (
               <div className='mb-4 relative'>
                 <div className='border rounded-md overflow-hidden relative aspect-video w-full max-w-md'>
-                  <Image src={media.file} alt='About section media' fill className='object-cover' />
+                  <Image
+                    src={media.file || '/placeholder.webp'}
+                    alt='About section media'
+                    fill
+                    className='object-cover'
+                  />
                 </div>
                 <p className='text-xs text-muted-foreground mt-1'>Current media image</p>
               </div>

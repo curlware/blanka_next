@@ -245,7 +245,7 @@ export default function Services({ data }: TProps) {
                       <div className='mb-4 relative'>
                         <div className='border rounded-md overflow-hidden relative w-24 h-24'>
                           <Image
-                            src={serviceIcons[index]?.file || ''}
+                            src={serviceIcons[index]?.file || '/placeholder.webp'}
                             alt={`Service ${index + 1} icon`}
                             fill
                             className='object-contain'

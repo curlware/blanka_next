@@ -32,10 +32,7 @@ export default function NavSheet({
       </SheetTrigger>
       <SheetContent side={side}>
         <SheetHeader>
-          <SheetTitle>
-            {logo}
-            {/* <Image src={logo} alt='Logo' width={100} height={100} /> */}
-          </SheetTitle>
+          <SheetTitle>{logo}</SheetTitle>
         </SheetHeader>
         <div className='flex-1 overflow-y-auto py-5'>
           <nav className='px-3 space-y-1'>

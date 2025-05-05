@@ -221,7 +221,7 @@ export default function Clients({ data }: TProps) {
                         <div className='mb-4 relative flex justify-center'>
                           <div className='border rounded-md overflow-hidden relative w-32 h-32 bg-gray-50 flex items-center justify-center'>
                             <Image
-                              src={clientLogos[index]?.file || ''}
+                              src={clientLogos[index]?.file || '/placeholder.webp'}
                               alt={`Client ${index + 1} logo`}
                               fill
                               className='object-contain p-2'

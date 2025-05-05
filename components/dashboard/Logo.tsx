@@ -31,7 +31,15 @@ export default function Logo({ data }: TProps) {
     <div>
       <h1 className='text-lg my-5 font-semibold lg:text-3xl'>Site Logo</h1>
       <p>Current Logo</p>
-      <Image src={data?.file as string} alt='Logo' width={200} height={200} className='my-2 p-2' />
+      <div className='p-2 w-fit shadow mb-4 border border-gray-300 rounded-md'>
+        <Image
+          src={data?.file || '/placeholder.webp'}
+          alt='Logo'
+          width={200}
+          height={200}
+          className='my-2 p-2'
+        />
+      </div>
       <ImageUploader fileId={data?.fileId} setFile={setLogo} />
       <div className='mt-5'>
         <Button onClick={handleLogoUpload}>Upload New Image</Button>
