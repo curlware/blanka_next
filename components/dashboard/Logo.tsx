@@ -33,7 +33,7 @@ export default function Logo({ data }: TProps) {
       <p>Current Logo</p>
       <div className='p-2 w-fit shadow mb-4 border border-gray-300 rounded-md'>
         <Image
-          src={data?.file || '/placeholder.webp'}
+          src={logo?.file || data?.file || '/placeholder.webp'}
           alt='Logo'
           width={200}
           height={200}
