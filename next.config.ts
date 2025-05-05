@@ -1,21 +1,9 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  /* config options here */
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'ik.imagekit.io',
-        port: '',
-        pathname: '/**'
-      },
-      {
-        protocol: 'https',
-        hostname: 'demo.cocobasic.com',
-        port: '',
-        pathname: '/**'
-      }
-    ]
+    remotePatterns: [new URL('https://demo.cocobasic.com/**'), new URL('https://ik.imagekit.io/**')]
   }
 }
 

@@ -1,5 +1,6 @@
 import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
+import { Toaster } from '@/components/ui/sonner'
 import { UserProvider } from '@/lib/auth'
 import retrieveUserFromSession from '@/utils/getUser'
 import type { Metadata } from 'next'
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${poppins.className} ${leagueScript.variable} ${montserrat.variable}`} suppressHydrationWarning>
         <UserProvider userPromise={userPromise}>
+          <Toaster richColors closeButton />
           <Header />
           <main>{children}</main>
           <Footer />

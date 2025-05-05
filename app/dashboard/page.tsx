@@ -1,17 +1,89 @@
-import { siteContentNavItems } from '@/configs/nav-data'
+import About from '@/components/dashboard/About'
+import Clients from '@/components/dashboard/Clients'
+import Contact from '@/components/dashboard/Contact'
+import Footer from '@/components/dashboard/Footer'
+import Hero from '@/components/dashboard/Hero'
+import Logo from '@/components/dashboard/Logo'
+import Services from '@/components/dashboard/Services'
+import Team from '@/components/dashboard/Team'
+import Testimonials from '@/components/dashboard/Testimonials'
+import { Card, CardContent } from '@/components/ui/card'
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/get-data`, {
+    next: { tags: ['data'] }
+  })
+
+  const data: ResponseData = await response.json()
+  if (!data?.data) {
+    return <div>No data available</div>
+  }
+
   return (
     <div className='grid gap-4'>
-      {siteContentNavItems
-        .map((item) => item.link)
-        .map((link, idx) => (
-          <div key={idx} id={link} className='mb-2 bg-blue-100 w-full h-64'>
-            <a href={link} className=''>
-              {link}
-            </a>
-          </div>
-        ))}
+      <div id='logo'>
+        <Card>
+          <CardContent>
+            <Logo data={data.data.logo} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='hero'>
+        <Card>
+          <CardContent>
+            <Hero data={data.data.hero} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='services'>
+        <Card>
+          <CardContent>
+            <Services data={data.data.services} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='about'>
+        <Card>
+          <CardContent>
+            <About data={data.data.about} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='clients'>
+        <Card>
+          <CardContent>
+            <Clients data={data.data.clients} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='testimonials'>
+        <Card>
+          <CardContent>
+            <Testimonials data={data.data.testimonials} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='team'>
+        <Card>
+          <CardContent>
+            <Team data={data.data.team} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='contact'>
+        <Card>
+          <CardContent>
+            <Contact data={data.data.contact} />
+          </CardContent>
+        </Card>
+      </div>
+      <div id='footer'>
+        <Card>
+          <CardContent>
+            <Footer data={data.data.footer} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

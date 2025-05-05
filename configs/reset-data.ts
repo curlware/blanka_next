@@ -278,6 +278,32 @@ export const defaultData: SiteContentData = {
   }
 }
 
+export const SOCIAL_PLATFORMS = [
+  'facebook',
+  'twitter',
+  'x',
+  'instagram',
+  'linkedin',
+  'youtube',
+  'pinterest',
+  'tiktok',
+  'snapchat',
+  'behance',
+  'dribbble',
+  'github',
+  'gitlab',
+  'medium',
+  'reddit',
+  'slack',
+  'twitch',
+  'whatsapp',
+  'telegram',
+  'discord',
+  'vimeo',
+  'threads',
+  'mastodon'
+]
+
 /**
  * Items to be removed from design
  *  portfolio

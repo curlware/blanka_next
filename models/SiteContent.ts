@@ -72,15 +72,16 @@ const siteContentSchema = new Schema(
         }
       },
       // Skills section
-      skills: [
-        {
-          title: String,
-          percentage: Number
-        }
-      ],
+      // skills: [
+      //   {
+      //     title: String,
+      //     percentage: Number
+      //   }
+      // ],
       // Clients section
       clients: {
         title: String,
+        subtitle: String,
         // stats: {
         //   count: Number,
         //   label: String

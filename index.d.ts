@@ -11,9 +11,13 @@ type MediaFile = {
 }
 
 type SocialLink = {
+  title?: string
+  link?: string
+}
+
+type SocialLinkTeam = {
   icon?: string
   link?: string
-  title?: string
 }
 
 // Section types
@@ -72,11 +76,12 @@ type SkillItem = {
 type ClientsSection = {
   title?: string
   subtitle?: string
-  stats?: {
-    count?: number
-    label?: string
-  }
+  // stats?: {
+  //   count?: number
+  //   label?: string
+  // }
   logos?: {
+    // brand logos
     image?: MediaFile
     link?: string
   }[]
@@ -94,7 +99,7 @@ type TeamMember = {
   role?: string
   image?: MediaFile
   bio?: string
-  socialLinks?: SocialLink[]
+  socialLinks?: SocialLinkTeam[]
 }
 
 type TeamSection = {
@@ -162,4 +167,10 @@ type SiteContent = {
   content: SiteContentData
   createdAt?: string | Date
   updatedAt?: string | Date
+}
+
+type ResponseData = {
+  success: boolean
+  data?: SiteContentData | null
+  error?: string
 }
