@@ -60,7 +60,7 @@ export default function ContactSection({ data = {} }: TProps) {
 
             {/* <!-- Google Map iframe as background --> */}
             <iframe
-                src="https://www.google.com/maps?q=23.7742514681378,90.36379221847676&hl=es;z=14&output=embed"
+                src={`https://www.google.com/maps?q=${mapLocation?.lat},${mapLocation?.lng}&hl=es;z=14&output=embed`}
                 className="bottom-0 left-0 z-0 absolute brightness-90 grayscale w-full h-[60%] pointer-events-none"
                 allowFullScreen
                 loading="lazy"
