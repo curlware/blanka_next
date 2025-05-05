@@ -1,3 +1,5 @@
+import Footer from '@/components/layout/footer'
+import Header from '@/components/layout/header'
 import { Toaster } from '@/components/ui/sonner'
 import { UserProvider } from '@/lib/auth'
 import retrieveUserFromSession from '@/utils/getUser'
@@ -23,8 +25,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${nunito.className}`} suppressHydrationWarning>
-        <Toaster richColors closeButton />
-        <UserProvider userPromise={userPromise}>{children}</UserProvider>
+        <UserProvider userPromise={userPromise}>
+          <Toaster richColors closeButton />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   )
