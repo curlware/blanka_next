@@ -1,7 +1,6 @@
 'use client'
 
 import { updateHomepageSection } from '@/actions/data/homepage'
-import ImageUploader from '@/components/others/ImageUploader'
 import { FormError } from '@/components/shared/form-error'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -16,40 +15,15 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus, Trash2 } from 'lucide-react'
-import Image from 'next/image'
 import { useState } from 'react'
-import { Control, useFieldArray, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
-import { SocialLinksSection } from './SocialLinkComp'
+import TeamMembers from './TeamMember'
 
 type TProps = {
   data?: TeamSection
 }
-
-// Define the Zod schema for social links - removed validation for performance
-const socialLinkSchema = z.object({
-  icon: z.string().optional(), // Removed validation that required a value
-  link: z.string().optional(), // Removed validation that required a valid URL
-  _id: z.string().optional() // For unique identification
-})
-
-// Define the Zod schema for team members
-const teamMemberSchema = z.object({
-  name: z
-    .string()
-    .min(1, { message: 'Name is required' })
-    .max(100, { message: 'Name is too long' }),
-  role: z
-    .string()
-    .min(1, { message: 'Role is required' })
-    .max(100, { message: 'Role is too long' }),
-  bio: z.string().max(500, { message: 'Bio is too long' }).optional(),
-  // Image will be handled separately with ImageUploader
-  socialLinks: z.array(socialLinkSchema).optional(),
-  _id: z.string().optional() // For unique identification
-})
 
 // Define the Zod schema for the team section
 const teamSectionSchema = z.object({
@@ -62,131 +36,12 @@ const teamSectionSchema = z.object({
     .min(1, { message: 'Subtitle is required' })
     .max(300, { message: 'Subtitle is too long' }),
   leftText: z.string().max(500, { message: 'Left text is too long' }).optional(),
-  rightText: z.string().max(500, { message: 'Right text is too long' }).optional(),
-  members: z.array(teamMemberSchema).min(1, { message: 'At least one team member is required' })
+  rightText: z.string().max(500, { message: 'Right text is too long' }).optional()
 })
 
 export type TeamFormValues = z.infer<typeof teamSectionSchema>
 
 // Team member card component
-const TeamMemberCard = ({
-  index,
-  memberImage,
-  onImageChange,
-  onRemove,
-  form,
-  control,
-  disabled
-}: {
-  index: number
-  memberImage?: MediaFile
-  onImageChange: (file: MediaFile) => void
-  onRemove: () => void
-  form: any
-  control: Control<TeamFormValues>
-  disabled: boolean
-}) => {
-  return (
-    <Card className='p-5 relative border border-gray-200'>
-      <div className='absolute top-4 right-4'>
-        <Button
-          type='button'
-          onClick={onRemove}
-          variant='ghost'
-          size='icon'
-          className='h-8 w-8 text-destructive'
-          disabled={disabled}
-        >
-          <Trash2 className='h-4 w-4' />
-        </Button>
-      </div>
-
-      <div className='grid gap-6 md:grid-cols-[200px_1fr]'>
-        {/* Team member photo and basic info */}
-        <div className='space-y-4'>
-          <div className='space-y-2'>
-            <FormLabel>Profile Photo</FormLabel>
-
-            {/* Image preview */}
-            {memberImage?.file && (
-              <div className='mb-4 relative'>
-                <div className='border rounded-md overflow-hidden relative w-32 h-32'>
-                  <Image
-                    src={memberImage.file}
-                    alt={`${form.getValues().members[index].name || 'Team member'} profile`}
-                    fill
-                    className='object-cover'
-                  />
-                </div>
-                <p className='text-xs text-muted-foreground mt-1'>Current photo</p>
-              </div>
-            )}
-
-            {/* Image uploader */}
-            <ImageUploader fileId={memberImage?.fileId} setFile={onImageChange} />
-            <p className='text-xs text-muted-foreground'>
-              Upload a profile photo. Square photos work best.
-            </p>
-          </div>
-
-          {/* Member name */}
-          <FormField
-            control={control}
-            name={`members.${index}.name`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder='John Doe' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Member role */}
-          <FormField
-            control={control}
-            name={`members.${index}.role`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role/Position</FormLabel>
-                <FormControl>
-                  <Input placeholder='CEO' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className='space-y-6'>
-          {/* Member bio */}
-          <FormField
-            control={control}
-            name={`members.${index}.bio`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bio</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder='A brief bio about this team member...'
-                    className='min-h-[100px]'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Social Links */}
-          <SocialLinksSection index={index} form={form} control={control} />
-        </div>
-      </div>
-    </Card>
-  )
-}
 
 export default function Team({ data }: TProps) {
   // Form submission states
@@ -194,9 +49,6 @@ export default function Team({ data }: TProps) {
   const [error, setError] = useState<string | null>(null)
 
   // State for team member images (separate from form state to handle file uploads)
-  const [memberImages, setMemberImages] = useState<(MediaFile | undefined)[]>(
-    data?.members?.map((member) => member.image) || []
-  )
 
   // Create form with default values from data prop and optimize validation
   const form = useForm<TeamFormValues>({
@@ -205,27 +57,7 @@ export default function Team({ data }: TProps) {
       title: data?.title || '',
       subtitle: data?.subtitle || '',
       leftText: data?.leftText || '',
-      rightText: data?.rightText || '',
-      members: data?.members?.map((member) => ({
-        name: member.name || '',
-        role: member.role || '',
-        bio: member.bio || '',
-        socialLinks:
-          member.socialLinks?.map((link) => ({
-            icon: link.icon || '',
-            link: link.link || '',
-            _id: Math.random().toString(36).substring(2, 9)
-          })) || [],
-        _id: Math.random().toString(36).substring(2, 9)
-      })) || [
-        {
-          name: '',
-          role: '',
-          bio: '',
-          socialLinks: [],
-          _id: Math.random().toString(36).substring(2, 9)
-        }
-      ]
+      rightText: data?.rightText || ''
     },
     mode: 'onSubmit', // Changed from onBlur to onSubmit for better performance
     shouldUnregister: false, // Keep fields registered when they unmount
@@ -233,41 +65,6 @@ export default function Team({ data }: TProps) {
   })
 
   const { control } = form
-
-  // Set up field array for managing team members
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'members'
-  })
-
-  // Update team member image when adding or removing items
-  const updateMemberImage = (index: number, image: MediaFile) => {
-    const newImages = [...memberImages]
-    newImages[index] = image
-    setMemberImages(newImages)
-  }
-
-  // Add a new team member
-  const addTeamMember = () => {
-    append({
-      name: '',
-      role: '',
-      bio: '',
-      socialLinks: [],
-      _id: Math.random().toString(36).substring(2, 9)
-    })
-    // Add an empty image placeholder
-    setMemberImages([...memberImages, undefined])
-  }
-
-  // Remove a team member
-  const removeTeamMember = (index: number) => {
-    remove(index)
-    // Also remove the corresponding image
-    const newImages = [...memberImages]
-    newImages.splice(index, 1)
-    setMemberImages(newImages)
-  }
 
   // Submit handler
   const onSubmit = async (values: TeamFormValues) => {
@@ -281,20 +78,7 @@ export default function Team({ data }: TProps) {
         subtitle: values.subtitle,
         leftText: values.leftText,
         rightText: values.rightText,
-        members: values.members.map((member, index) => ({
-          name: member.name,
-          role: member.role,
-          bio: member.bio,
-          image: memberImages[index],
-          // Filter out empty links and _id to prevent MongoDB validation errors
-          socialLinks: member.socialLinks
-            ?.filter((link) => link.icon && link.link)
-            .map((link) => ({
-              icon: link.icon,
-              link: link.link
-              // Intentionally omitting _id here
-            }))
-        }))
+        members: data?.members || [] // Keep existing members
       }
 
       // Call the server action to update the team section
@@ -364,7 +148,7 @@ export default function Team({ data }: TProps) {
                   name='leftText'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Left Column Text (Optional)</FormLabel>
+                      <FormLabel>Left Column Text</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder='Additional information about your team...'
@@ -382,7 +166,7 @@ export default function Team({ data }: TProps) {
                   name='rightText'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Right Column Text (Optional)</FormLabel>
+                      <FormLabel>Right Column Text</FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder='Additional information about your team...'
@@ -396,38 +180,6 @@ export default function Team({ data }: TProps) {
                 />
               </div>
 
-              {/* Team members */}
-              <div className='space-y-4'>
-                <div className='flex justify-between items-center'>
-                  <h2 className='text-lg font-medium'>Team Members</h2>
-                  <Button type='button' onClick={addTeamMember} variant='outline' size='sm'>
-                    <Plus className='h-4 w-4 mr-2' />
-                    Add Team Member
-                  </Button>
-                </div>
-
-                <div className='space-y-6'>
-                  {fields.map((field, index) => (
-                    <TeamMemberCard
-                      key={field._id}
-                      index={index}
-                      memberImage={memberImages[index]}
-                      onImageChange={(file) => updateMemberImage(index, file)}
-                      onRemove={() => removeTeamMember(index)}
-                      form={form}
-                      control={control}
-                      disabled={fields.length <= 1}
-                    />
-                  ))}
-                </div>
-
-                {fields.length === 0 && (
-                  <div className='text-center py-8 text-muted-foreground'>
-                    No team members added yet. Click the "Add Team Member" button to add one.
-                  </div>
-                )}
-              </div>
-
               <Button type='submit' disabled={isSubmitting} className='mt-6'>
                 {isSubmitting ? 'Saving...' : 'Save Team Section'}
               </Button>
@@ -435,6 +187,8 @@ export default function Team({ data }: TProps) {
           </Form>
         </CardContent>
       </Card>
+
+      <TeamMembers data={data} />
     </div>
   )
 }
