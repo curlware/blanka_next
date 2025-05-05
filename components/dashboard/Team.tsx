@@ -4,7 +4,7 @@ import { updateHomepageSection } from '@/actions/data/homepage'
 import ImageUploader from '@/components/others/ImageUploader'
 import { FormError } from '@/components/shared/form-error'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -202,7 +202,7 @@ const TeamMemberCard = memo(
     disabled: boolean
   }) => {
     return (
-      <Card className='p-5 relative border border-gray-200'>
+      <Card className='p-5 relative border border-gray-200 hover:border-black'>
         <div className='absolute top-4 right-4'>
           <Button
             type='button'
@@ -508,110 +508,105 @@ export default function Team({ data }: TProps) {
   return (
     <div>
       <h1 className='text-lg my-5 font-semibold lg:text-3xl'>Team Section</h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+          {/* Display error message */}
+          {error && <FormError message={error} />}
 
-      <Card>
-        <CardContent className='pt-6'>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-              {/* Display error message */}
-              {error && <FormError message={error} />}
+          {/* Section title and subtitle */}
+          <div className='grid gap-4 md:grid-cols-2'>
+            <FormField
+              control={control}
+              name='title'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Section Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Our Team' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              {/* Section title and subtitle */}
-              <div className='grid gap-4 md:grid-cols-2'>
-                <FormField
-                  control={control}
-                  name='title'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Section Title</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Our Team' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <FormField
+              control={control}
+              name='subtitle'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Section Subtitle</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Meet the experts behind our success' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-                <FormField
-                  control={control}
-                  name='subtitle'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Section Subtitle</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Meet the experts behind our success' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+          {/* Optional text columns */}
+          <div className='grid gap-4 md:grid-cols-2'>
+            <FormField
+              control={control}
+              name='leftText'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Left Column Text (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder='Additional information about your team...'
+                      className='h-24'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              {/* Optional text columns */}
-              <div className='grid gap-4 md:grid-cols-2'>
-                <FormField
-                  control={control}
-                  name='leftText'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Left Column Text (Optional)</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder='Additional information about your team...'
-                          className='h-24'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <FormField
+              control={control}
+              name='rightText'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Right Column Text (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder='Additional information about your team...'
+                      className='h-24'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-                <FormField
-                  control={control}
-                  name='rightText'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Right Column Text (Optional)</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder='Additional information about your team...'
-                          className='h-24'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              {/* Team members */}
-              <div className='space-y-4'>
-                <div className='flex justify-between items-center'>
-                  <h2 className='text-lg font-medium'>Team Members</h2>
-                  <Button type='button' onClick={addTeamMember} variant='outline' size='sm'>
-                    <Plus className='h-4 w-4 mr-2' />
-                    Add Team Member
-                  </Button>
-                </div>
-
-                <div className='space-y-6'>{teamMembers}</div>
-
-                {fields.length === 0 && (
-                  <div className='text-center py-8 text-muted-foreground'>
-                    No team members added yet. Click the "Add Team Member" button to add one.
-                  </div>
-                )}
-              </div>
-
-              <Button type='submit' disabled={isSubmitting} className='mt-6'>
-                {isSubmitting ? 'Saving...' : 'Save Team Section'}
+          {/* Team members */}
+          <div className='space-y-4'>
+            <div className='flex justify-between items-center'>
+              <h2 className='text-lg font-medium'>Team Members</h2>
+              <Button type='button' onClick={addTeamMember} variant='outline' size='sm'>
+                <Plus className='h-4 w-4 mr-2' />
+                Add Team Member
               </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+            </div>
+
+            <div className='space-y-6'>{teamMembers}</div>
+
+            {fields.length === 0 && (
+              <div className='text-center py-8 text-muted-foreground'>
+                No team members added yet. Click the "Add Team Member" button to add one.
+              </div>
+            )}
+          </div>
+
+          <Button type='submit' disabled={isSubmitting} className='mt-6'>
+            {isSubmitting ? 'Saving...' : 'Save Team Section'}
+          </Button>
+        </form>
+      </Form>
     </div>
   )
 }
