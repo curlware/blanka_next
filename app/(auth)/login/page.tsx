@@ -57,7 +57,6 @@ export default function LoginPage() {
     startTransition(async () => {
       try {
         const result = await login(values)
-        console.log('rsutl', result)
 
         if (result.error) {
           setError(result.error)

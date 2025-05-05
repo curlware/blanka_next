@@ -12,11 +12,6 @@ export async function DELETE(request: Request) {
 
   const base64PrivateKey = Buffer.from(privateKey + ':').toString('base64')
 
-  console.log('private key', {
-    privateKey,
-    base64PrivateKey
-  })
-
   try {
     const response = await fetch(`https://api.imagekit.io/v1/files/${fileId}`, {
       method: 'DELETE',
