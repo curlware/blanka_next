@@ -4,7 +4,6 @@ import { renderadminNavItems } from '@/app/dashboard/layout'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { AlignLeft } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 
 type TProps = {
   logo: string
@@ -21,8 +20,6 @@ export default function NavSheet({
   currentHash,
   setCurrentHash
 }: TProps) {
-  const pathname = usePathname()
-
   return (
     <Sheet>
       <SheetTrigger asChild>
