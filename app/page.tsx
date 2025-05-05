@@ -1,4 +1,5 @@
 import { AboutSection, HeroSection, ServiceSection } from "@/components/homepage";
+import ClientSection from "@/components/homepage/clients";
 
 type TProps = {}
 
@@ -18,6 +19,7 @@ export default async function page({ }: TProps) {
       <HeroSection data={data?.data?.hero} />
       <ServiceSection data={data?.data?.services} />
       <AboutSection data={data?.data?.about} />
+      <ClientSection data={data?.data?.clients} />
     </>
   )
 }
