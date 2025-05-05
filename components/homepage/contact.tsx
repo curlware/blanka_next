@@ -11,6 +11,7 @@ export default function ContactSection({ data = {} }: TProps) {
     } = data
     return (
         <section
+            id="Contact"
             className={cn("relative flex justify-center items-center py-20 bg-gray-200")}
         >
             <div className="z-10 relative space-y-12 mx-auto px-4 max-w-6xl container">

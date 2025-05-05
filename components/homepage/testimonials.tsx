@@ -8,6 +8,7 @@ type TProps = {
 export default function TestimonialSection({ data = [] }: TProps) {
     return (
         <section
+            id="Testimonial"
             className={cn(
                 "relative flex justify-center items-center py-16 md:py-20",
                 "bg-[url('/images/testimonial_bg.jpg')] bg-top bg-no-repeat bg-cover",

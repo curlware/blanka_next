@@ -9,6 +9,7 @@ export default function HeroSection({ data = {} }: TProps) {
     const { title, subtitle, ctaText, ctaLink, backgroundImage } = data
     return (
         <section
+            id="Home"
             className={cn("relative flex justify-center items-center bg-cover bg-fixed bg-center w-full h-svh", !backgroundImage && "bg-primary/90")}
             style={backgroundImage ? { backgroundImage: `url(${backgroundImage.file})` } : undefined}
         >

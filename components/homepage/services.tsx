@@ -10,6 +10,7 @@ export default function ServiceSection({ data = {} }: TProps) {
     const { title, subtitle, items } = data
     return (
         <section
+            id="Services"
             className={cn("relative flex justify-center items-center bg-contain bg-scroll bg-bottom py-20 bg-[url('/images/service-bg.png')] bg-no-repeat bg-white pb-40")}
         >
             <div className="space-y-12 mx-auto max-w-6xl container">

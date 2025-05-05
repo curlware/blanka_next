@@ -1,11 +1,23 @@
+'use client'
 import { SheetHeader } from '@/components/ui/sheet'
 import { siteConfig } from "@/configs/nav-data"
 import { cn } from "@/lib/utils"
+import { scrollToElement } from '@/utils/scrollTo'
 import Image from "next/image"
 import Link from "next/link"
+import { useEffect, useState } from 'react'
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTrigger } from "../ui/sheet"
 
 export default function Header() {
+    const [currentHash, setCurrentHash] = useState('')
+
+    useEffect(() => {
+        if (window) {
+            const id = window.location.hash?.substring(1) || ''
+            setCurrentHash(id)
+            scrollToElement(id)
+        }
+    }, [])
     return (
         <header className="top-0 z-10 fixed bg-primary p-4 w-full text-white">
             <div className="mx-auto container">
@@ -17,7 +29,15 @@ export default function Header() {
                     <ul className="hidden md:flex space-x-4">
                         {siteConfig?.mainNav?.map((item) =>
                             <li key={item?.title}>
-                                <Link prefetch={false} href={item?.href} className="block px-3 py-2.5 text-white hover:text-secondary">{item?.title}</Link>
+                                <button
+                                    className="block px-3 py-2.5 text-white hover:text-secondary"
+                                    onClick={() => {
+                                        scrollToElement(item.title)
+                                        setCurrentHash(item.title)
+                                    }}
+                                >
+                                    {item?.title}
+                                </button>
                             </li>
                         )}
                     </ul>
@@ -60,9 +80,15 @@ export default function Header() {
                     </div>
 
 
-                    <Link href='/contact' className='hidden md:block' >
-                        <span className='block bg-primary-foreground hover:bg-secondary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out transform'>Contact Us</span>
-                    </Link>
+                    <button
+                        className='hidden md:block bg-primary-foreground hover:bg-secondary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out transform'
+                        onClick={() => {
+                            scrollToElement('Contact')
+                            setCurrentHash('Contact')
+                        }}
+                    >
+                        Contact Us
+                    </button>
                 </nav>
             </div>
         </header >

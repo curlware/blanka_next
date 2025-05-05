@@ -30,7 +30,7 @@ export const siteContentNavItems = [
   // {
   //   label: 'Portfolio',
   //   link: 'portfolio',
-  //   icon: <Image className='h-4 w-4 mr-2' />
+  //   icon: <Image className='mr-2 w-4 h-4' />
   // },
   {
     label: 'About',
@@ -40,7 +40,7 @@ export const siteContentNavItems = [
   // {
   //   label: 'Skills',
   //   link: 'skills',
-  //   icon: <BarChart3 className='h-4 w-4 mr-2' />
+  //   icon: <BarChart3 className='mr-2 w-4 h-4' />
   // },
   {
     label: 'Clients',
@@ -60,7 +60,7 @@ export const siteContentNavItems = [
   // {
   //   label: 'Pricing',
   //   link: 'pricing',
-  //   icon: <PieChart className='h-4 w-4 mr-2' />
+  //   icon: <PieChart className='mr-2 w-4 h-4' />
   // },
   {
     label: 'Contact',
@@ -109,12 +109,12 @@ export const siteConfig = {
       href: '/#clients'
     },
     {
-      title: 'Team',
-      href: '/#team'
+      title: 'Testimonial',
+      href: '/#testimonial'
     },
     {
-      title: 'News',
-      href: '/#news'
+      title: 'Team',
+      href: '/#team'
     }
   ],
   footerNav: [

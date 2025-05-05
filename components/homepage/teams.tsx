@@ -12,6 +12,7 @@ export default function TeamSection({ data = {} }: TProps) {
     const { members, title, subtitle, rightText, leftText } = data
     return (
         <section
+            id="Team"
             className={cn(
                 "relative flex justify-center items-center py-16 md:py-20",
                 "bg-[url('/images/team_bg.jpg')] bg-repeat md:bg-contain bg-fixed bg-center bg-cover",

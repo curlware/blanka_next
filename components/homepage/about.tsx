@@ -11,6 +11,7 @@ export default function AboutSection({ data = {} }: TProps) {
     const { title, subtitle, heading, ctaLink, ctaText, description, media, } = data
     return (
         <section
+            id="About"
             className={cn("relative flex justify-center items-center py-30 bg-gray-50")}
         >
             <div className="space-y-20 mx-auto px-4 max-w-6xl container">
