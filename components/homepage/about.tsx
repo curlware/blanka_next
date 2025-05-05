@@ -15,10 +15,10 @@ export default function AboutSection({ data = {} }: TProps) {
         <section
             className={cn("relative flex justify-center items-center py-30 bg-gray-50")}
         >
-            <div className="space-y-20 mx-auto max-w-6xl container">
+            <div className="space-y-20 mx-auto px-4 max-w-6xl container">
                 <SectionHeading title={title} subtitle={subtitle} />
 
-                <div className="justify-between items-center gap-16 grid grid-cols-1 md:grid-cols-2 pb-2">
+                <div className="justify-center items-center gap-16 grid grid-cols-1 md:grid-cols-2 pb-2 text-center md:text-start">
                     <div className="space-y-16">
                         <h2 className="font-light text-secondary-foreground text-4xl">{heading}</h2>
                         <p className="text-secondary-foreground/70 whitespace-pre-wrap">{description}</p>
