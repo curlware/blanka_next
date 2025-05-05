@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Earth, Mail, MapPin, Smartphone } from "lucide-react";
-import { SectionHeading } from "../common";
+import { AnimatedButton, SectionHeading } from "../common";
 
 type TProps = {
     data: ContactSection | undefined
@@ -14,11 +14,12 @@ export default function ContactSection({ data = {} }: TProps) {
             id="Contact"
             className={cn("relative flex justify-center items-center py-20 bg-gray-200")}
         >
-            <div className="z-10 relative space-y-12 mx-auto px-4 max-w-6xl container">
+            <div className="z-10 relative space-y-12 md:space-y-20 mx-auto px-4 max-w-6xl container">
                 <SectionHeading title={title} subtitle={subtitle} />
 
                 <div className="flex md:flex-row flex-col rounded-[3rem] w-full h-full overflow-hidden">
-                    <div className="space-y-16 bg-primary-foreground px-20 py-28 w-full md:w-1/2 text-white">
+                    {/* Contact Information */}
+                    <div className="space-y-16 bg-primary-foreground px-10 md:px-20 py-12 md:py-28 w-full md:w-1/2 text-white">
                         <h4 className="font-light text-2xl">{heading}</h4>
                         <p className="font-light">{description}</p>
 
@@ -41,8 +42,17 @@ export default function ContactSection({ data = {} }: TProps) {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white p-16 w-full md:w-1/2">
-                        <h4>{JSON.stringify(mapLocation)}</h4>
+
+                    {/* Contact Form */}
+                    <div className="bg-white px-10 md:px-20 py-12 md:py-28 w-full md:w-1/2">
+                        <form action="#" className="space-y-12">
+                            <input placeholder="Your Name" className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />
+                            <input placeholder="Your Email" className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />
+                            <input placeholder="Your Subject" className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />
+                            <textarea placeholder="Message" rows={6} className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />
+
+                            <AnimatedButton title={"Send"} url={""} />
+                        </form>
                     </div>
                 </div>
             </div>
