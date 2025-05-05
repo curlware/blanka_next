@@ -124,6 +124,10 @@
   }
 }
 
+::selection {
+  @apply bg-secondary text-white;
+}
+
 .scroll-icon::before {
   content: '';
   width: 8px;

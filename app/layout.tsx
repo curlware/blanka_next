@@ -1,5 +1,3 @@
-import Footer from '@/components/layout/footer'
-import Header from '@/components/layout/header'
 import { Toaster } from '@/components/ui/sonner'
 import { UserProvider } from '@/lib/auth'
 import { SiteDataProvider } from '@/lib/dataContext'
@@ -48,9 +46,7 @@ export default function RootLayout({
         <UserProvider userPromise={userPromise}>
           <SiteDataProvider siteDataPromise={siteDataPromise}>
             <Toaster richColors closeButton />
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <>{children}</>
           </SiteDataProvider>
         </UserProvider>
       </body>
