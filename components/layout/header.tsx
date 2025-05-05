@@ -17,7 +17,7 @@ export default function Header() {
                     <ul className="hidden md:flex space-x-4">
                         {siteConfig?.mainNav?.map((item) =>
                             <li key={item?.title}>
-                                <Link prefetch={false} href={item?.href} className="block px-3 py-2.5 text-white hover:text-primary-foreground">{item?.title}</Link>
+                                <Link prefetch={false} href={item?.href} className="block px-3 py-2.5 text-white hover:text-secondary">{item?.title}</Link>
                             </li>
                         )}
                     </ul>
@@ -47,11 +47,11 @@ export default function Header() {
                                     <ul className="flex flex-col justify-center space-x-4 text-center">
                                         {siteConfig?.mainNav?.map((item) =>
                                             <li key={item?.title}>
-                                                <Link prefetch={false} href={item?.href} className="block px-3 py-3.5 text-white hover:text-primary-foreground">{item?.title}</Link>
+                                                <Link prefetch={false} href={item?.href} className="block px-3 py-3.5 text-white hover:text-secondary">{item?.title}</Link>
                                             </li>
                                         )}
                                         <li>
-                                            <Link prefetch={false} href='/contact' className="block px-3 py-3.5 text-white hover:text-primary-foreground">Contact Us</Link>
+                                            <Link prefetch={false} href='/contact' className="block px-3 py-3.5 text-white hover:text-secondary">Contact Us</Link>
                                         </li>
                                     </ul>
                                 </SheetDescription>
@@ -61,7 +61,7 @@ export default function Header() {
 
 
                     <Link href='/contact' className='hidden md:block' >
-                        <span className='block bg-[#5f1ab4] hover:bg-primary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out transform'>Contact Us</span>
+                        <span className='block bg-primary-foreground hover:bg-secondary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out transform'>Contact Us</span>
                     </Link>
                 </nav>
             </div>
