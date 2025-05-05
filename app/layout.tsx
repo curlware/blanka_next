@@ -2,27 +2,29 @@ import Footer from '@/components/layout/footer'
 import Header from '@/components/layout/header'
 import { Toaster } from '@/components/ui/sonner'
 import { UserProvider } from '@/lib/auth'
+import { SiteDataProvider } from '@/lib/dataContext'
+import getData from '@/utils/getData'
 import retrieveUserFromSession from '@/utils/getUser'
 import type { Metadata } from 'next'
 import { League_Script, Montserrat, Poppins } from 'next/font/google'
 import './globals.css'
 
 const poppins = Poppins({
-  weight: ["200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
+  weight: ['200', '300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-poppins'
 })
 
 const leagueScript = League_Script({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-league-script",
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-league-script'
 })
 
 const montserrat = Montserrat({
-  weight: ["200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-montserrat",
+  weight: ['200', '300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-montserrat'
 })
 
 export const metadata: Metadata = {
@@ -36,14 +38,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const userPromise = retrieveUserFromSession()
+  const siteDataPromise = getData()
   return (
     <html lang='en'>
-      <body className={`${poppins.className} ${leagueScript.variable} ${montserrat.variable}`} suppressHydrationWarning>
+      <body
+        className={`${poppins.className} ${leagueScript.variable} ${montserrat.variable}`}
+        suppressHydrationWarning
+      >
         <UserProvider userPromise={userPromise}>
-          <Toaster richColors closeButton />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <SiteDataProvider siteDataPromise={siteDataPromise}>
+            <Toaster richColors closeButton />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </SiteDataProvider>
         </UserProvider>
       </body>
     </html>
