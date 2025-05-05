@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { SectionHeading } from "../common";
-import AnimatedButton from "../common/animated-btn";
+import { AnimatedButton, SectionHeading } from "../common";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../ui/dialog";
 
 type TProps = {
-    data: AboutSection
+    data: AboutSection | undefined
 }
 
 export default function AboutSection({ data = {} }: TProps) {

@@ -4,11 +4,10 @@ import Link from "next/link";
 import { SectionHeading } from "../common";
 
 type TProps = {
-    data: ClientsSection
+    data: ClientsSection | undefined
 }
 
 export default function ClientSection({ data = {} }: TProps) {
-    console.log('data :>> ', data);
     const { title, logos, stats } = data
     return (
         <section
@@ -17,8 +16,8 @@ export default function ClientSection({ data = {} }: TProps) {
             <div className="space-y-16 mx-auto px-4 max-w-6xl container">
                 <SectionHeading title={title} />
 
-                <div className="flex flex-wrap justify-start items-center gap-4 md:gap-12">
-                    {logos?.concat(logos)?.concat(logos)?.map((logo, index) => (
+                <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
+                    {logos?.map((logo, index) => (
                         <Link key={index} href={logo?.link || "#"} target="_blank" rel="noopener noreferrer" className="flex justify-center items-center border w-fit">
                             <Image src={logo?.image?.file || ""} alt={`Client Logo ${index}`} width={180} height={65} className="" />
                         </Link>
