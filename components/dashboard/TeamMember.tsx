@@ -53,7 +53,7 @@ const teamMemberSchema = z.object({
     .min(1, { message: 'At least one team member is required' })
 })
 
-type TeamMemberFormValues = z.infer<typeof teamMemberSchema>
+export type TeamMemberFormValues = z.infer<typeof teamMemberSchema>
 
 function TeamMemberCard({
   index,
@@ -90,8 +90,8 @@ function TeamMemberCard({
               <div className='mb-4 relative'>
                 <div className='border rounded-md overflow-hidden relative w-32 h-32'>
                   <Image
-                    src={memberImage.file}
-                    alt={`${form.getValues().members[index].name || 'Team member'} profile`}
+                    src={memberImage.file || '/placeholder.webp'}
+                    alt={'profile'}
                     fill
                     className='object-cover'
                   />
