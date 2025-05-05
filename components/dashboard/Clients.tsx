@@ -32,6 +32,7 @@ const clientsSectionSchema = z.object({
     .string()
     .min(1, { message: 'Title is required' })
     .max(100, { message: 'Title is too long' }),
+  subtitle: z.string().max(300, { message: 'Subtitle is too long' }).optional(),
   logos: z.array(
     z.object({
       link: z.string().optional(),
@@ -58,6 +59,7 @@ export default function Clients({ data }: TProps) {
     resolver: zodResolver(clientsSectionSchema),
     defaultValues: {
       title: data?.title || '',
+      subtitle: data?.subtitle || '',
       logos: data?.logos?.map((logo) => ({
         link: logo.link || '',
         _id: Math.random().toString(36).substring(2, 9)
@@ -67,7 +69,8 @@ export default function Clients({ data }: TProps) {
           _id: Math.random().toString(36).substring(2, 9)
         }
       ]
-    }
+    },
+    mode: 'onBlur'
   })
 
   // Set up field array for managing client logos
@@ -111,6 +114,7 @@ export default function Clients({ data }: TProps) {
       // Combine form data with logo data
       const clientsData: ClientsSection = {
         title: values.title,
+        subtitle: values.subtitle,
         logos: values.logos.map((item, index) => ({
           link: item.link,
           image: clientLogos[index]
@@ -153,6 +157,19 @@ export default function Clients({ data }: TProps) {
                 <FormLabel>Section Title</FormLabel>
                 <FormControl>
                   <Input placeholder='Our Clients' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='subtitle'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Section SubTitle</FormLabel>
+                <FormControl>
+                  <Input placeholder='...' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

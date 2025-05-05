@@ -328,7 +328,7 @@ const SocialLinksSection = memo(
         <div className='flex justify-between items-center'>
           <FormLabel>Social Media Links</FormLabel>
 
-          <Button type='button' variant='outline' size='sm' onClick={addSocialLink}>
+          <Button type='button' variant='success' size='sm' onClick={addSocialLink}>
             <Plus className='h-3 w-3 mr-1' />
             Add Link
           </Button>
@@ -587,7 +587,7 @@ export default function Team({ data }: TProps) {
           <div className='space-y-4'>
             <div className='flex justify-between items-center'>
               <h2 className='text-lg font-medium'>Team Members</h2>
-              <Button type='button' onClick={addTeamMember} variant='outline' size='sm'>
+              <Button type='button' onClick={addTeamMember} variant='success' size='sm'>
                 <Plus className='h-4 w-4 mr-2' />
                 Add Team Member
               </Button>

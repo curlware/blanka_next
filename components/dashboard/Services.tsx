@@ -85,7 +85,8 @@ export default function Services({ data }: TProps) {
           _id: Math.random().toString(36).substring(2, 9)
         }
       ]
-    }
+    },
+    mode: 'onBlur'
   })
 
   // Set up field array for managing service items

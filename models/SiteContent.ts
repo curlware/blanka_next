@@ -81,6 +81,7 @@ const siteContentSchema = new Schema(
       // Clients section
       clients: {
         title: String,
+        subtitle: String,
         // stats: {
         //   count: Number,
         //   label: String

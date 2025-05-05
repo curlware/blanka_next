@@ -62,7 +62,8 @@ export default function Hero({ data }: TProps) {
       subtitle: data?.subtitle || '',
       ctaText: data?.ctaText || '',
       ctaLink: data?.ctaLink || ''
-    }
+    },
+    mode: 'onBlur'
   })
 
   // Submit handler

@@ -71,7 +71,8 @@ export default function About({ data }: TProps) {
       description: data?.description || '',
       ctaText: data?.ctaText || '',
       ctaLink: data?.ctaLink || ''
-    }
+    },
+    mode: 'onBlur'
   })
 
   // Submit handler

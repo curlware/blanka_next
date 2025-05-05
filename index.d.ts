@@ -11,6 +11,11 @@ type MediaFile = {
 }
 
 type SocialLink = {
+  title?: string
+  link?: string
+}
+
+type SocialLinkTeam = {
   icon?: string
   link?: string
 }
@@ -70,6 +75,7 @@ type SkillItem = {
 
 type ClientsSection = {
   title?: string
+  subtitle?: string
   // stats?: {
   //   count?: number
   //   label?: string
@@ -93,7 +99,7 @@ type TeamMember = {
   role?: string
   image?: MediaFile
   bio?: string
-  socialLinks?: SocialLink[]
+  socialLinks?: SocialLinkTeam[]
 }
 
 type TeamSection = {

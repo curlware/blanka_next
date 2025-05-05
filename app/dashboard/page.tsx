@@ -1,6 +1,7 @@
 import About from '@/components/dashboard/About'
 import Clients from '@/components/dashboard/Clients'
 import Contact from '@/components/dashboard/Contact'
+import Footer from '@/components/dashboard/Footer'
 import Hero from '@/components/dashboard/Hero'
 import Logo from '@/components/dashboard/Logo'
 import Services from '@/components/dashboard/Services'
@@ -79,7 +80,7 @@ export default async function DashboardPage() {
       <div id='footer'>
         <Card>
           <CardContent>
-            <p className='text-sm'>Footer content goes here...</p>
+            <Footer data={data.data.footer} />
           </CardContent>
         </Card>
       </div>
