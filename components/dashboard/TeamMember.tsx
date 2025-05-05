@@ -1,16 +1,14 @@
 import { updateHomepageSection } from '@/actions/data/homepage'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 import ImageUploader from '../others/ImageUploader'
 import { Button } from '../ui/button'
 import { Card, CardContent } from '../ui/card'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
+import { Label } from '../ui/label'
 import { Textarea } from '../ui/textarea'
 import { SocialLinksSection } from './SocialLinkComp'
 
@@ -19,8 +17,8 @@ type TProps = {
   memberImage?: MediaFile
   onImageChange: (file: MediaFile) => void
   onRemove: () => void
-  form: any
-  control: any
+  member: TeamMember
+  onMemberChange: (member: TeamMember) => void
   disabled: boolean
 }
 
@@ -55,15 +53,44 @@ const teamMemberSchema = z.object({
 
 export type TeamMemberFormValues = z.infer<typeof teamMemberSchema>
 
+// Type definition for a team member
+type TeamMember = {
+  name: string
+  role: string
+  bio?: string
+  socialLinks?: Array<{
+    icon: string
+    link: string
+    _id: string
+  }>
+  _id?: string
+}
+
 function TeamMemberCard({
   index,
   memberImage,
   onImageChange,
   onRemove,
-  form,
-  control,
+  member,
+  onMemberChange,
   disabled
 }: TProps) {
+  // Handle field changes
+  const handleFieldChange = (field: keyof TeamMember, value: string) => {
+    onMemberChange({
+      ...member,
+      [field]: value
+    })
+  }
+
+  // Handle social links changes
+  const handleSocialLinksChange = (links: any[]) => {
+    onMemberChange({
+      ...member,
+      socialLinks: links
+    })
+  }
+
   return (
     <Card className='p-5 relative border border-gray-200'>
       <div className='absolute top-4 right-4'>
@@ -72,7 +99,7 @@ function TeamMemberCard({
           onClick={onRemove}
           variant='ghost'
           size='icon'
-          className='h-8 w-8 text-destructive'
+          className='size-8 bg-red-100 text-destructive hover:text-white cursor-pointer hover:bg-destructive'
           disabled={disabled}
         >
           <Trash2 className='h-4 w-4' />
@@ -83,7 +110,7 @@ function TeamMemberCard({
         {/* Team member photo and basic info */}
         <div className='space-y-4'>
           <div className='space-y-2'>
-            <FormLabel>Profile Photo</FormLabel>
+            <Label>Profile Photo</Label>
 
             {/* Image preview */}
             {memberImage?.file && (
@@ -108,58 +135,43 @@ function TeamMemberCard({
           </div>
 
           {/* Member name */}
-          <FormField
-            control={control}
-            name={`members.${index}.name`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder='John Doe' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div>
+            <Label>Name</Label>
+            <Input
+              placeholder='John Doe'
+              defaultValue={member.name || ''}
+              onBlur={(e) => handleFieldChange('name', e.target.value)}
+            />
+          </div>
 
           {/* Member role */}
-          <FormField
-            control={control}
-            name={`members.${index}.role`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Role/Position</FormLabel>
-                <FormControl>
-                  <Input placeholder='CEO' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div>
+            <Label>Role/Position</Label>
+            <Input
+              placeholder='CEO'
+              defaultValue={member.role || ''}
+              onBlur={(e) => handleFieldChange('role', e.target.value)}
+            />
+          </div>
         </div>
 
-        <div className='space-y-6'>
+        <div className='space-y-6 mt-4'>
           {/* Member bio */}
-          <FormField
-            control={control}
-            name={`members.${index}.bio`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bio</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder='A brief bio about this team member...'
-                    className='min-h-[100px]'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div>
+            <Label>Bio</Label>
+            <Textarea
+              placeholder='A brief bio about this team member...'
+              className='min-h-[100px]'
+              defaultValue={member.bio || ''}
+              onBlur={(e) => handleFieldChange('bio', e.target.value)}
+            />
+          </div>
 
           {/* Social Links */}
-          <SocialLinksSection index={index} form={form} control={control} />
+          <SocialLinksSection
+            socialLinks={member.socialLinks || []}
+            onSocialLinksChange={handleSocialLinksChange}
+          />
         </div>
       </div>
     </Card>
@@ -172,43 +184,28 @@ export default function TeamMembers({ data }: { data?: TeamSection }) {
   const [memberImages, setMemberImages] = useState<(MediaFile | undefined)[]>(
     data?.members?.map((member) => member.image) || []
   )
-
-  const form = useForm<TeamMemberFormValues>({
-    resolver: zodResolver(teamMemberSchema),
-    defaultValues: {
-      members: data?.members?.map((member) => ({
-        name: member.name || '',
-        role: member.role || '',
-        bio: member.bio || '',
-        socialLinks:
-          member.socialLinks?.map((link: any) => ({
-            icon: link.icon || '',
-            link: link.link || '',
-            _id: Math.random().toString(36).substring(2, 9)
-          })) || [],
-        _id: Math.random().toString(36).substring(2, 9)
-      })) || [
-        {
-          name: '',
-          role: '',
-          bio: '',
-          socialLinks: [],
+  const [members, setMembers] = useState<TeamMember[]>(
+    data?.members?.map((member) => ({
+      name: member.name || '',
+      role: member.role || '',
+      bio: member.bio || '',
+      socialLinks:
+        member.socialLinks?.map((link: any) => ({
+          icon: link.icon || '',
+          link: link.link || '',
           _id: Math.random().toString(36).substring(2, 9)
-        }
-      ]
-    },
-    mode: 'onBlur', // Changed from onBlur to onSubmit for better performance
-    shouldUnregister: false, // Keep fields registered when they unmount
-    reValidateMode: 'onBlur' // Changed from onBlur to onSubmit for better performance
-  })
-
-  const { control } = form
-
-  // Set up field array for managing team members
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'members'
-  })
+        })) || [],
+      _id: Math.random().toString(36).substring(2, 9)
+    })) || [
+      {
+        name: '',
+        role: '',
+        bio: '',
+        socialLinks: [],
+        _id: Math.random().toString(36).substring(2, 9)
+      }
+    ]
+  )
 
   // Update team member image when adding or removing items
   const updateMemberImage = (index: number, image: MediaFile) => {
@@ -217,40 +214,65 @@ export default function TeamMembers({ data }: { data?: TeamSection }) {
     setMemberImages(newImages)
   }
 
+  // Update a team member's data
+  const updateMember = (index: number, updatedMember: TeamMember) => {
+    const newMembers = [...members]
+    newMembers[index] = updatedMember
+    setMembers(newMembers)
+  }
+
   // Add a new team member
   const addTeamMember = () => {
-    append({
-      name: '',
-      role: '',
-      bio: '',
-      socialLinks: [],
-      _id: Math.random().toString(36).substring(2, 9)
-    })
+    setMembers([
+      ...members,
+      {
+        name: '',
+        role: '',
+        bio: '',
+        socialLinks: [],
+        _id: Math.random().toString(36).substring(2, 9)
+      }
+    ])
+
     // Add an empty image placeholder
     setMemberImages([...memberImages, undefined])
   }
 
   // Remove a team member
   const removeTeamMember = (index: number) => {
-    remove(index)
+    const newMembers = [...members]
+    newMembers.splice(index, 1)
+    setMembers(newMembers)
+
     // Also remove the corresponding image
     const newImages = [...memberImages]
     newImages.splice(index, 1)
     setMemberImages(newImages)
   }
 
-  const onSubmit = async (values: TeamMemberFormValues) => {
+  const onSubmit = async () => {
     setIsSubmitting(true)
     setError(null)
 
     try {
+      // Validate form data
+      const hasNameAndRole = members.every(
+        (member) => member.name.trim() !== '' && member.role.trim() !== ''
+      )
+
+      if (!hasNameAndRole) {
+        setError('Each team member must have a name and role')
+        setIsSubmitting(false)
+        return
+      }
+
       // Combine form data with image data
       const teamData: TeamSection = {
         title: data?.title || '',
         subtitle: data?.subtitle || '',
         leftText: data?.leftText || '',
         rightText: data?.rightText || '',
-        members: values.members.map((member, index) => ({
+        members: members.map((member, index) => ({
           name: member.name,
           role: member.role,
           bio: member.bio,
@@ -295,30 +317,28 @@ export default function TeamMembers({ data }: { data?: TeamSection }) {
           </Button>
         </div>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-            {fields.map((field, index) => (
-              <TeamMemberCard
-                key={field._id}
-                index={index}
-                memberImage={memberImages[index]}
-                onImageChange={(file) => updateMemberImage(index, file)}
-                onRemove={() => removeTeamMember(index)}
-                form={form}
-                control={control}
-                disabled={fields.length <= 1}
-              />
-            ))}
+        <div className='space-y-8'>
+          {members.map((member, index) => (
+            <TeamMemberCard
+              key={member._id}
+              index={index}
+              memberImage={memberImages[index]}
+              onImageChange={(file) => updateMemberImage(index, file)}
+              onRemove={() => removeTeamMember(index)}
+              member={member}
+              onMemberChange={(updatedMember) => updateMember(index, updatedMember)}
+              disabled={members.length <= 1}
+            />
+          ))}
 
-            {fields.length > 0 && (
-              <Button type='submit' disabled={isSubmitting} className='mt-6'>
-                {isSubmitting ? 'Saving...' : 'Save Team Members'}
-              </Button>
-            )}
-          </form>
-        </Form>
+          {members.length > 0 && (
+            <Button type='button' onClick={onSubmit} disabled={isSubmitting} className='mt-6'>
+              {isSubmitting ? 'Saving...' : 'Save Team Members'}
+            </Button>
+          )}
+        </div>
 
-        {fields.length === 0 && (
+        {members.length === 0 && (
           <div className='text-center py-8 text-muted-foreground'>
             No team members added yet. Click the "Add Team Member" button to add one.
           </div>

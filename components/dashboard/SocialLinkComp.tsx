@@ -1,85 +1,75 @@
 import { SOCIAL_PLATFORMS } from '@/configs/reset-data'
 import { Plus, Trash2 } from 'lucide-react'
-import { Control } from 'react-hook-form'
 import { Button } from '../ui/button'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
+import { Label } from '../ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import SocialIcon from '../ui/SocialIcon'
-import { TeamMemberFormValues } from './TeamMember'
+
+// Define the types for social links
+type SocialLink = {
+  icon: string
+  link: string
+  _id: string
+}
 
 // Social link item component
 export function SocialLinkItem({
-  index,
-  socialIndex,
-  control,
+  icon,
+  link,
+  onIconChange,
+  onLinkChange,
   onRemove
 }: {
-  index: number
-  socialIndex: number
-  control: Control<TeamMemberFormValues>
+  icon: string
+  link: string
+  onIconChange: (value: string) => void
+  onLinkChange: (value: string) => void
   onRemove: () => void
 }) {
   return (
     <div className='flex gap-2 items-end'>
       {/* Social Platform */}
-      <FormField
-        control={control}
-        name={`members.${index}.socialLinks.${socialIndex}.icon`}
-        render={({ field }) => (
-          <FormItem className='flex-1'>
-            <FormControl>
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className='w-[140px]'>
-                  <SelectValue placeholder='Platform'>
-                    {field.value && (
-                      <div className='flex items-center gap-2'>
-                        <SocialIcon network={field.value} size={16} />
-                        <span className='capitalize'>{field.value}</span>
-                      </div>
-                    )}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {SOCIAL_PLATFORMS.map((platform) => (
-                    <SelectItem key={platform} value={platform}>
-                      <div className='flex items-center gap-2'>
-                        <SocialIcon network={platform} size={16} />
-                        <span className='capitalize'>{platform}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <div className='flex-1'>
+        <Select defaultValue={icon} onValueChange={onIconChange}>
+          <SelectTrigger className='w-[140px]'>
+            <SelectValue placeholder='Platform'>
+              {icon && (
+                <div className='flex items-center gap-2'>
+                  <span className='capitalize'>{icon}</span>
+                </div>
+              )}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            {SOCIAL_PLATFORMS.map((platform) => (
+              <SelectItem key={platform} value={platform}>
+                <div className='flex items-center gap-2'>
+                  <span className='capitalize'>{platform}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
       {/* Social Link */}
-      <FormField
-        control={control}
-        name={`members.${index}.socialLinks.${socialIndex}.link`}
-        render={({ field }) => (
-          <FormItem className='flex-[2]'>
-            <FormControl>
-              <Input placeholder='https://...' {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <div className='flex-[2]'>
+        <Input
+          placeholder='https://...'
+          defaultValue={link}
+          onBlur={(e) => onLinkChange(e.target.value)}
+        />
+      </div>
 
       {/* Remove Link Button */}
       <Button
         type='button'
         variant='ghost'
         size='icon'
-        className='h-9 w-9 text-destructive'
+        className='size-6 bg-red-100 text-destructive hover:text-white cursor-pointer hover:bg-destructive'
         onClick={onRemove}
       >
-        <Trash2 className='h-4 w-4' />
+        <Trash2 className='size-3' />
       </Button>
     </div>
   )
@@ -87,35 +77,42 @@ export function SocialLinkItem({
 
 // Social links section component
 export function SocialLinksSection({
-  index,
-  form,
-  control
+  socialLinks,
+  onSocialLinksChange
 }: {
-  index: number
-  form: any
-  control: Control<TeamMemberFormValues>
+  socialLinks: SocialLink[]
+  onSocialLinksChange: (links: SocialLink[]) => void
 }) {
-  // Get social links only when needed using a callback
-  const getSocialLinks = () => form.getValues(`members.${index}.socialLinks`) || []
-
   const addSocialLink = () => {
-    const currentLinks = getSocialLinks()
-    form.setValue(`members.${index}.socialLinks`, [
-      ...currentLinks,
+    onSocialLinksChange([
+      ...socialLinks,
       {
-        icon: 'linkedin',
+        icon: 'facebook',
         link: '',
         _id: Math.random().toString(36).substring(2, 9)
       }
     ])
   }
 
-  const socialLinks = getSocialLinks()
+  const updateSocialLink = (index: number, field: 'icon' | 'link', value: string) => {
+    const updatedLinks = [...socialLinks]
+    updatedLinks[index] = {
+      ...updatedLinks[index],
+      [field]: value
+    }
+    onSocialLinksChange(updatedLinks)
+  }
+
+  const removeSocialLink = (index: number) => {
+    const updatedLinks = [...socialLinks]
+    updatedLinks.splice(index, 1)
+    onSocialLinksChange(updatedLinks)
+  }
 
   return (
     <div className='space-y-3'>
       <div className='flex justify-between items-center'>
-        <FormLabel>Social Media Links</FormLabel>
+        <Label>Social Media Links</Label>
 
         <Button type='button' variant='outline' size='sm' onClick={addSocialLink}>
           <Plus className='h-3 w-3 mr-1' />
@@ -124,17 +121,14 @@ export function SocialLinksSection({
       </div>
 
       <div className='space-y-2'>
-        {socialLinks.map((_: any, socialIndex: any) => (
+        {socialLinks.map((socialLink, index) => (
           <SocialLinkItem
-            key={`${index}-${socialIndex}`}
-            index={index}
-            socialIndex={socialIndex}
-            control={control}
-            onRemove={() => {
-              const currentLinks = [...getSocialLinks()]
-              currentLinks.splice(socialIndex, 1)
-              form.setValue(`members.${index}.socialLinks`, currentLinks)
-            }}
+            key={socialLink._id}
+            icon={socialLink.icon}
+            link={socialLink.link}
+            onIconChange={(value) => updateSocialLink(index, 'icon', value)}
+            onLinkChange={(value) => updateSocialLink(index, 'link', value)}
+            onRemove={() => removeSocialLink(index)}
           />
         ))}
 
