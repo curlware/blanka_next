@@ -23,7 +23,6 @@ export default function Header() {
 
   const { siteData } = useSiteData()
 
-
   return (
     <header className="top-0 z-20 fixed bg-primary p-4 w-full text-white">
       <div className="mx-auto container">
