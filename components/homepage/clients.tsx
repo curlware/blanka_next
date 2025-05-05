@@ -8,13 +8,13 @@ type TProps = {
 }
 
 export default function ClientSection({ data = {} }: TProps) {
-    const { title, logos, stats } = data
+    const { title, subtitle, logos, stats } = data
     return (
         <section
             className={cn("relative flex justify-center items-center py-20 md:py-30  bg-secondary-foreground/15")}
         >
-            <div className="space-y-16 mx-auto px-4 max-w-6xl container">
-                <SectionHeading title={title} />
+            <div className="space-y-16 md:space-y-20 mx-auto px-4 max-w-6xl container">
+                <SectionHeading title={title} subtitle={subtitle} />
 
                 <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
                     {logos?.map((logo, index) => (

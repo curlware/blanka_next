@@ -71,6 +71,7 @@ type SkillItem = {
 
 type ClientsSection = {
   title?: string
+  subtitle?: string
   stats?: {
     count?: number
     label?: string

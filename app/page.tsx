@@ -1,5 +1,6 @@
 import { AboutSection, HeroSection, ServiceSection } from "@/components/homepage";
 import ClientSection from "@/components/homepage/clients";
+import ContactSection from "@/components/homepage/contact";
 import TeamSection from "@/components/homepage/teams";
 import TestimonialSection from "@/components/homepage/testimonials";
 
@@ -15,8 +16,6 @@ async function getData() {
 export default async function page({ }: TProps) {
   const data = await getData()
   const homeData: SiteContentData = data?.data
-
-  // console.log('data :>> ', data);
   return (
     <>
       <HeroSection data={homeData?.hero} />
@@ -25,6 +24,7 @@ export default async function page({ }: TProps) {
       <ClientSection data={homeData?.clients} />
       <TestimonialSection data={homeData?.testimonials} />
       <TeamSection data={homeData?.team} />
+      <ContactSection data={homeData?.contact} />
     </>
   )
 }
