@@ -3,7 +3,7 @@
 import { createContext, ReactNode, use, useContext, useEffect, useState } from 'react'
 
 type SiteDataContextType = {
-  siteData: SiteContentData | null | undefined | string
+  siteData: SiteContentData | null | undefined
   // eslint-disable-next-line no-unused-vars
   setSiteData: (siteData: SiteContentData | null) => void
 }
