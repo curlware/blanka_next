@@ -56,7 +56,7 @@ export default function TestimonialCarousel({ data = [] }: TProps) {
                         stiffness: 35,
                         damping: 10,
                     }}
-                    className="space-y-2 md:space-y-6 mx-auto max-w-2xl text-white"
+                    className="space-y-2 md:space-y-6 mx-auto max-w-3xl text-white"
                 >
                     <h4 className="min-h-32 overflow-hidden font-light text-lg md:text-2xl line-clamp-4 md:line-clamp-3 leading-relaxed">{testimonials[current].quote}</h4>
                     <div className="flex flex-col justify-center items-center gap-2">

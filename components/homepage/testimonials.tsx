@@ -10,8 +10,9 @@ export default function TestimonialSection({ data = [] }: TProps) {
         <section
             className={cn(
                 "relative flex justify-center items-center py-16 md:py-20",
-                "bg-[linear-gradient(to_top,#4b04a0,#4b04a0,#6f04a2),url('/images/service-bg.png')] bg-top bg-no-repeat bg-contain",
+                "bg-[url('/images/testimonial_bg.jpg')] bg-top bg-no-repeat bg-cover",
                 "bg-blend-overlay"
+                // "bg-[linear-gradient(to_top,#4b04a0,#4b04a0,#6f04a2),url('/images/service-bg.png')] bg-top bg-no-repeat bg-contain",
             )}
         >
             <div className="mx-auto px-4 max-w-6xl text-center container">
