@@ -1,5 +1,6 @@
 'use client'
 import { AboutSection, HeroSection, ServiceSection } from "@/components/homepage";
+import BlogSection from "@/components/homepage/blogs";
 import ClientSection from "@/components/homepage/clients";
 import ContactSection from "@/components/homepage/contact";
 import TeamSection from "@/components/homepage/teams";
@@ -28,6 +29,7 @@ export default function page({ }: TProps) {
       <ClientSection data={siteData?.clients} />
       <TestimonialSection data={siteData?.testimonials} />
       <TeamSection data={siteData?.team} />
+      <BlogSection data={siteData?.team} />
       <ContactSection data={siteData?.contact} />
     </>
   )

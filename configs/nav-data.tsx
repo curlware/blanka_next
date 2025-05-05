@@ -115,6 +115,10 @@ export const siteConfig = {
     {
       title: 'Team',
       href: '/#team'
+    },
+    {
+      title: 'Blog',
+      href: '/#blog'
     }
   ],
   footerNav: [
