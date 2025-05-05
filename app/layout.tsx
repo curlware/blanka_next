@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { UserProvider } from '@/lib/auth'
 import retrieveUserFromSession from '@/utils/getUser'
 import type { Metadata } from 'next'
-import { League_Script, Poppins } from 'next/font/google'
+import { League_Script, Montserrat, Poppins } from 'next/font/google'
 import './globals.css'
 
 const poppins = Poppins({
@@ -17,6 +17,12 @@ const leagueScript = League_Script({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-league-script",
+})
+
+const montserrat = Montserrat({
+  weight: ["200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-montserrat",
 })
 
 export const metadata: Metadata = {
@@ -32,7 +38,7 @@ export default function RootLayout({
   const userPromise = retrieveUserFromSession()
   return (
     <html lang='en'>
-      <body className={`${poppins.className} ${leagueScript.variable}`} suppressHydrationWarning>
+      <body className={`${poppins.className} ${leagueScript.variable} ${montserrat.variable}`} suppressHydrationWarning>
         <UserProvider userPromise={userPromise}>
           <Toaster richColors closeButton />
           <Header />

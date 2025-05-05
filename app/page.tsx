@@ -1,5 +1,6 @@
 import { AboutSection, HeroSection, ServiceSection } from "@/components/homepage";
 import ClientSection from "@/components/homepage/clients";
+import TestimonialSection from "@/components/homepage/testimonials";
 
 type TProps = {}
 
@@ -11,15 +12,17 @@ async function getData() {
 }
 
 export default async function page({ }: TProps) {
-  const data: any = await getData()
+  const data = await getData()
+  const homeData: SiteContentData = data?.data
 
   // console.log('data :>> ', data);
   return (
     <>
-      <HeroSection data={data?.data?.hero} />
-      <ServiceSection data={data?.data?.services} />
-      <AboutSection data={data?.data?.about} />
-      <ClientSection data={data?.data?.clients} />
+      <HeroSection data={homeData?.hero} />
+      <ServiceSection data={homeData?.services} />
+      <AboutSection data={homeData?.about} />
+      <ClientSection data={homeData?.clients} />
+      <TestimonialSection data={homeData?.testimonials} />
     </>
   )
 }

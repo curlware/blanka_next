@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import AnimatedButton from "../common/animated-btn";
+import { AnimatedButton } from "../common";
 
 type TProps = {
-    data: HeroSection
+    data: HeroSection | undefined
 }
 
 export default function HeroSection({ data = {} }: TProps) {

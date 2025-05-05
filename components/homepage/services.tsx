@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { SectionHeading } from "../common";
-import FadeUp from "../common/fadeUp";
+import { FadeUp, SectionHeading } from "../common";
 
 type TProps = {
-    data: ServicesSection
+    data: ServicesSection | undefined
 }
 
 export default function ServiceSection({ data = {} }: TProps) {
