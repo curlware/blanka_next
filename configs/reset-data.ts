@@ -259,24 +259,50 @@ export const defaultData: SiteContentData = {
     copyright: '© 2022 Blanka WordPress Theme by CocoBasic.',
     socialLinks: [
       {
-        icon: 'Twitter',
+        title: 'Twitter',
         link: '#'
       },
       {
-        icon: 'Facebook',
+        title: 'Facebook',
         link: '#'
       },
       {
-        icon: 'Instagram',
+        title: 'Instagram',
         link: '#'
       },
       {
-        icon: 'Behance',
+        title: 'Behance',
         link: '#'
       }
     ]
   }
 }
+
+export const SOCIAL_PLATFORMS = [
+  'facebook',
+  'twitter',
+  'x',
+  'instagram',
+  'linkedin',
+  'youtube',
+  'pinterest',
+  'tiktok',
+  'snapchat',
+  'behance',
+  'dribbble',
+  'github',
+  'gitlab',
+  'medium',
+  'reddit',
+  'slack',
+  'twitch',
+  'whatsapp',
+  'telegram',
+  'discord',
+  'vimeo',
+  'threads',
+  'mastodon'
+]
 
 /**
  * Items to be removed from design
