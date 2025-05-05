@@ -18,29 +18,32 @@ export default function Header() {
             scrollToElement(id)
         }
     }, [])
+
     return (
-        <header className="top-0 z-10 fixed bg-primary p-4 w-full text-white">
+        <header className="top-0 z-20 fixed bg-primary p-4 w-full text-white">
             <div className="mx-auto container">
                 <nav className="flex justify-between items-center">
                     <Link href='/' className="">
                         <Image src='/logo.png' alt="Logo" height={20} width={140} />
                     </Link>
 
-                    <ul className="hidden md:flex space-x-4">
+                    <div className="hidden md:flex space-x-4">
                         {siteConfig?.mainNav?.map((item) =>
-                            <li key={item?.title}>
-                                <button
-                                    className="block px-3 py-2.5 text-white hover:text-secondary"
-                                    onClick={() => {
-                                        scrollToElement(item.title)
-                                        setCurrentHash(item.title)
-                                    }}
-                                >
-                                    {item?.title}
-                                </button>
-                            </li>
+                            <button
+                                key={item?.title}
+                                className={cn(
+                                    "block px-3 py-2.5 text-white hover:text-secondary",
+                                    { "text-secondary": currentHash === item?.title }
+                                )}
+                                onClick={() => {
+                                    scrollToElement(item.title)
+                                    setCurrentHash(item.title)
+                                }}
+                            >
+                                {item?.title}
+                            </button>
                         )}
-                    </ul>
+                    </div>
 
 
                     <div className="md:hidden block">
@@ -90,7 +93,7 @@ export default function Header() {
                         Contact Us
                     </button>
                 </nav>
-            </div>
+            </div >
         </header >
     )
 }
