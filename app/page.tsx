@@ -1,18 +1,19 @@
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { HeroSection } from '@/components/homepage'
 
 type TProps = {}
 
-export default async function page({}: TProps) {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-data`)
-  console.log('data', await data.json())
+async function getPost() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/get-data`, { next: { tags: ['data'] } })
+  const data: any = await res.json()
+  // if (!post) notFound()
+  return data
+}
+
+export default async function page({ }: TProps) {
+  const data: any = await getPost()
   return (
-    <div>
-      <div>
-        <Link className='flex' href='/dashboard'>
-          Dashboard <ArrowRight />
-        </Link>
-      </div>
-    </div>
+    <>
+      <HeroSection data={data?.data?.hero} />
+    </>
   )
 }
