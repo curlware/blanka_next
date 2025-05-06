@@ -17,8 +17,8 @@ export default function AboutSection({ data = {} }: TProps) {
             <div className="space-y-20 mx-auto px-4 max-w-6xl container">
                 <SectionHeading title={title} subtitle={subtitle} />
 
-                <div className="flex md:flex-row flex-col justify-center items-center gap-16 pb-2 text-center md:text-start">
-                    <div className="space-y-16 w-full md:w-1/2">
+                <div className="flex lg:flex-row flex-col justify-center items-center gap-16 pb-2 text-center lg:text-start">
+                    <div className="space-y-16 w-full lg:w-1/2">
                         <h2 className="font-light text-secondary-foreground text-4xl">{heading}</h2>
                         <p className="text-secondary-foreground/70 whitespace-pre-wrap">{description}</p>
                         <div className="block">
@@ -26,7 +26,7 @@ export default function AboutSection({ data = {} }: TProps) {
                         </div>
                     </div>
 
-                    <div className="group relative flex justify-center items-center w-full md:w-1/2 h-full aspect-square">
+                    <div className="group relative flex justify-center items-center w-full lg:w-1/2 max-w-md h-full aspect-square">
                         {media?.thumbnail && <Image src={media?.thumbnail} alt={title || ''} width={450} height={450} className="shadow-lg rounded-full w-full h-full object-cover" />}
                         <Dialog>
                             <DialogTrigger>
@@ -35,7 +35,7 @@ export default function AboutSection({ data = {} }: TProps) {
                                 </span>
                             </DialogTrigger>
 
-                            <DialogContent className="p-0 border-0 min-w-6xl aspect-video overflow-hidden">
+                            <DialogContent className="p-0 border-0 lg:min-w-6xl aspect-video overflow-hidden">
                                 <DialogTitle className="hidden">Video</DialogTitle>
                                 <video controls autoPlay loop muted className="w-full h-full object-cover">
                                     <source src="/about.mp4" type="video/mp4" />

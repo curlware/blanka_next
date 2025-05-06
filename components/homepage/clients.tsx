@@ -16,7 +16,7 @@ export default function ClientSection({ data = {} }: TProps) {
     <section
       id='Clients'
       className={cn(
-        'relative flex justify-center items-center py-20 md:py-30  bg-secondary-foreground/15'
+        'relative flex justify-center items-center py-20 md:py-24 bg-secondary-foreground/15'
       )}
     >
       <div className='space-y-16 mx-auto px-4 max-w-6xl container'>

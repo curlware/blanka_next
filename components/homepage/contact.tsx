@@ -19,7 +19,7 @@ export default function ContactSection({ data = {} }: TProps) {
 
                 <div className="flex md:flex-row flex-col rounded-[3rem] w-full h-full overflow-hidden">
                     {/* Contact Information */}
-                    <div className="space-y-16 bg-primary-foreground px-10 md:px-20 py-12 md:py-28 w-full md:w-1/2 text-white">
+                    <div className="space-y-16 bg-primary-foreground px-10 sm:px-16 lg:px-20 py-12 sm:py-20 lg:py-28 w-full md:w-1/2 text-white">
                         <h4 className="font-light text-2xl">{heading}</h4>
                         <p className="font-light">{description}</p>
 
@@ -44,7 +44,7 @@ export default function ContactSection({ data = {} }: TProps) {
                     </div>
 
                     {/* Contact Form */}
-                    <div className="bg-white px-10 md:px-20 py-12 md:py-28 w-full md:w-1/2">
+                    <div className="bg-white px-10 sm:px-16 lg:px-20 py-12 sm:py-20 lg:py-28 w-full md:w-1/2">
                         <form action="#" className="space-y-12">
                             <input placeholder="Your Name" className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />
                             <input placeholder="Your Email" className="py-2 border-b border-black focus:outline-0 focus:ring-0 w-full" />

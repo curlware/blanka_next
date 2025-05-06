@@ -34,7 +34,7 @@ export default function TeamSection({ data = {} }: TProps) {
                     </p>
                 </div>
 
-                <div className="sm:gap-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-2">
+                <div className="sm:gap-10 lg:gap-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 pb-2">
                     {members?.map((data, index) => (
                         <div
                             key={index}

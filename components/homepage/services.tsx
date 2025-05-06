@@ -14,7 +14,7 @@ export default function ServiceSection({ data = {} }: TProps) {
     return (
         <section
             id="Services"
-            className={cn("relative flex justify-center items-center bg-contain bg-scroll bg-bottom py-20 bg-[url('/images/service-bg.png')] bg-no-repeat bg-white pb-40")}
+            className={cn("relative flex justify-center items-center bg-contain bg-scroll bg-bottom py-20 bg-[url('/images/service-bg.png')] bg-no-repeat bg-white lg:pb-40")}
         >
             <div className="space-y-12 mx-auto px-4 max-w-6xl container">
                 <SectionHeading title={title} subtitle={subtitle} />

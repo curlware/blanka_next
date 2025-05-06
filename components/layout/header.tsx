@@ -72,7 +72,7 @@ export default function Header() {
 
 
                 <SheetDescription asChild>
-                  <div className="flex flex-col justify-center space-x-4 text-center">
+                  <div className="flex flex-col justify-center space-x-4 pb-20 overflow-y-auto text-center">
                     {siteConfig?.mainNav?.map((item) =>
                       <button
                         key={item?.title}
