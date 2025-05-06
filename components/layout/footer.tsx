@@ -13,7 +13,7 @@ export default function Footer() {
                     <ul className="inline-flex">
                         {siteData?.footer?.socialLinks?.map((item) =>
                             <li key={item.title}>
-                                <Link href={item?.link || '#'} target="_blank" className="p-2.5 hover:text-primary-foreground">{item?.title}</Link>
+                                <Link href={item?.link || '#'} target="_blank" className="p-2.5 hover:text-secondary">{item?.title}</Link>
                             </li>
                         )}
                     </ul>
