@@ -6,14 +6,15 @@ import { cn } from '@/lib/utils'
 import { scrollToElement } from '@/utils/scrollTo'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 // Recursive function to render nav items with children
 export const renderadminNavItems = (
   items: typeof adminNavItems,
   currentHash: string,
-  setCurrentHash: (hash: string) => void
+  setCurrentHash: (hash: string) => void,
+  pathname = ''
 ) => {
   const router = useRouter()
   return items.map((item, idx) => {
@@ -24,8 +25,8 @@ export const renderadminNavItems = (
         <button
           onClick={() => (item.link ? router.push(item.link) : void 0)}
           className={cn(
-            'flex items-center w-full text-left px-3 py-2 text-sm font-medium rounded-md transition-colors',
-            isActive(item.link)
+            'flex items-center w-full text-left px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer',
+            pathname === item.link
               ? 'bg-primary/10 text-primary'
               : 'text-muted-foreground hover:bg-accent hover:text-foreground',
             item.link === '' && 'bg-transparent hover:bg-transparent'
@@ -64,6 +65,7 @@ export const renderadminNavItems = (
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [currentHash, setCurrentHash] = useState('')
+  const pathname = usePathname()
 
   useEffect(() => {
     if (window) {
@@ -101,7 +103,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
           <div className='flex-1 overflow-y-auto py-5'>
             <nav className='px-3 space-y-1'>
-              {renderadminNavItems(adminNavItems, currentHash, setCurrentHash)}
+              {renderadminNavItems(adminNavItems, currentHash, setCurrentHash, pathname)}
               {/* <button
                 onClick={handleResetData}
                 className={cn(

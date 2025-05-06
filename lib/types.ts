@@ -81,6 +81,58 @@ export interface PostCreateData {
 }
 
 /**
+ * Blog interface
+ */
+export interface Blog {
+  _id: string
+  title: string
+  image: {
+    thumbnail: string
+    file: string
+    fileId: string
+  }
+  shortDescription: string
+  content: string
+  date: Date
+  published: boolean
+  createdAt: Date
+  updatedAt: Date
+}
+
+/**
+ * Blog document interface for Mongoose
+ */
+export interface BlogDocument extends Document {
+  title: string
+  image: {
+    thumbnail: string
+    file: string
+    fileId: string
+  }
+  shortDescription: string
+  content: string
+  date: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+/**
+ * Blog creation/update payload
+ */
+export interface BlogCreateUpdateData {
+  title: string
+  image: {
+    thumbnail: string
+    file: string
+    fileId: string
+  }
+  shortDescription: string
+  content: string
+  published: boolean
+  date: Date
+}
+
+/**
  * User creation payload
  */
 export interface UserCreateData {

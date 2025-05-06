@@ -6,6 +6,7 @@ import {
   Lightbulb,
   MessageSquare,
   Phone,
+  ReceiptText,
   Settings,
   ShoppingBag,
   Users
@@ -85,6 +86,16 @@ export const adminNavItems = [
     link: '',
     icon: <Settings className='mr-2 w-4 h-4' />,
     children: siteContentNavItems
+  },
+  {
+    label: 'Users',
+    link: '/dashboard/users',
+    icon: <Users className='mr-2 w-4 h-4' />
+  },
+  {
+    label: 'Blogs',
+    link: '/dashboard/blogs',
+    icon: <ReceiptText className='mr-2 w-4 h-4' />
   }
 ]
 
