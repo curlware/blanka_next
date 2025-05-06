@@ -10,6 +10,9 @@ type TProps = {
 
 export default function TeamSection({ data = {} }: TProps) {
     const { members, title, subtitle, rightText, leftText } = data
+
+    if (!members?.length) return null
+
     return (
         <section
             id="Team"

@@ -6,6 +6,9 @@ type TProps = {
 }
 
 export default function TestimonialSection({ data = [] }: TProps) {
+
+    if (!data?.length) return null
+
     return (
         <section
             id="Testimonial"

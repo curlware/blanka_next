@@ -31,7 +31,7 @@ export default function Header() {
             <Image src={siteData?.logo?.file || '/images/logo.png'} alt="Logo" height={20} width={140} />
           </Link>
 
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden lg:flex space-x-4">
             {siteConfig?.mainNav?.map((item) =>
               <button
                 key={item?.title}
@@ -49,10 +49,10 @@ export default function Header() {
             )}
           </div>
 
-          <div className="md:hidden block">
+          <div className="lg:hidden block">
             <Sheet>
               <SheetTrigger>
-                <span className="group md:hidden flex flex-col justify-center items-center gap-1.5 p-2 border border-transparent rounded-md focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 font-medium text-white text-sm cursor-pointer">
+                <span className="group lg:hidden flex flex-col justify-center items-center gap-1.5 p-2 border border-transparent rounded-md focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 font-medium text-white text-sm cursor-pointer">
                   <span className="bg-white w-6 h-[3px]" />
                   <span className="bg-white -mr-5 group-hover:-mr-0 w-6 h-[3px] transition-all duration-300 ease-in-out transform" />
                   <span className="bg-white w-6 h-[3px]" />
@@ -62,7 +62,7 @@ export default function Header() {
                 <SheetHeader>
                   <DialogTitle className='hidden'>Menu</DialogTitle>
                   <SheetClose className={cn("absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background !bg-primary !z-50 transition-opacity hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-ring focus:ring-offset-0 disabled:pointer-events-none data-[state=open]:bg-accent")}>
-                    <span className="group md:hidden flex flex-col justify-center items-center gap-1.5 p-2 rounded-md focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 font-medium text-white text-sm cursor-pointer">
+                    <span className="group lg:hidden flex flex-col justify-center items-center gap-1.5 p-2 rounded-md focus:outline-none focus:ring-0 focus:ring-primary focus:ring-offset-0 font-medium text-white text-sm cursor-pointer">
                       <span className="bg-white w-6 h-[3px]" />
                       <span className="bg-white -ml-5 group-hover:-ml-0 w-6 h-[3px] transition-all duration-300 ease-in-out transform" />
                       <span className="bg-white w-6 h-[3px]" />
@@ -102,7 +102,7 @@ export default function Header() {
 
 
           <button
-            className='hidden md:block bg-primary-foreground hover:bg-secondary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out cursor-pointer transform'
+            className='hidden lg:block bg-primary-foreground hover:bg-secondary-foreground px-6 py-2 rounded-full font-bold transition-all duration-300 ease-in-out cursor-pointer transform'
             onClick={() => {
               scrollToElement('Contact')
               setCurrentHash('Contact')

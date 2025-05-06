@@ -29,7 +29,7 @@ export default function page({ }: TProps) {
       <ClientSection data={siteData?.clients} />
       <TestimonialSection data={siteData?.testimonials} />
       <TeamSection data={siteData?.team} />
-      <BlogSection data={siteData?.team} />
+      <BlogSection data={siteData?.blog} />
       <ContactSection data={siteData?.contact} />
     </>
   )

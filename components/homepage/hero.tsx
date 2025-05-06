@@ -14,13 +14,13 @@ export default function HeroSection({ data = {} }: TProps) {
             style={backgroundImage ? { backgroundImage: `url(${backgroundImage.file})` } : undefined}
         >
             <div className="mx-auto container">
-                <div className="flex flex-col justify-center items-center space-y-10 md:space-y-12 mx-auto max-w-md md:max-w-xl h-full text-center">
-                    <h1 className="font-league-script font-medium text-white text-8xl md:text-9xl">{title}</h1>
-                    <p className="font-poppins font-light text-white text-xl md:text-3xl leading-relaxed">{subtitle}</p>
+                <div className="flex flex-col justify-center items-center space-y-10 lg:space-y-12 mx-auto max-w-md lg:max-w-xl h-full text-center">
+                    <h1 className="font-league-script font-medium text-white text-8xl lg:text-9xl">{title}</h1>
+                    <p className="font-poppins font-light text-white text-xl lg:text-3xl leading-relaxed">{subtitle}</p>
 
                     {ctaText && ctaLink && <AnimatedButton title={ctaText} url={ctaLink} />}
                 </div>
-                <span className="bottom-6 left-1/2 absolute shadow-inner shadow-white rounded-full w-9 h-16 -translate-x-1/2 scroll-icon" />
+                <span className="md:invisible visible xl:visible bottom-6 left-1/2 absolute shadow-inner shadow-white rounded-full w-9 h-16 -translate-x-1/2 scroll-icon" />
             </div>
         </section>
     )

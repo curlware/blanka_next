@@ -110,6 +110,21 @@ type TeamSection = {
   members?: TeamMember[]
 }
 
+type BlogData = {
+  title: string
+  image: MediaFile
+  shortDescription: string
+  content: string
+  published: boolean
+  date: Date
+}
+
+type BlogSection = {
+  title?: string
+  subtitle?: string
+  blogs?: BlogData[]
+}
+
 type PricingPlan = {
   name?: string
   price?: number
@@ -158,6 +173,7 @@ type SiteContentData = {
   team?: TeamSection
   pricing?: PricingSection
   contact?: ContactSection
+  blog?: BlogSection
   footer?: FooterSection
 }
 

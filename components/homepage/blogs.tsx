@@ -3,11 +3,14 @@ import Image from "next/image";
 import { SectionHeading } from "../common";
 
 type TProps = {
-    data: TeamSection | undefined
+    data: BlogSection | undefined
 }
 
 export default function BlogSection({ data = {} }: TProps) {
-    const { members, title, subtitle, rightText, leftText } = data
+    const { title, subtitle, blogs } = data
+
+    if (!blogs?.length) return null
+
     return (
         <section
             id="Blog"
@@ -19,22 +22,22 @@ export default function BlogSection({ data = {} }: TProps) {
                 <SectionHeading title={title} subtitle={subtitle} />
 
                 <div className="sm:gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {members?.map((data, index) => (
+                    {blogs?.map((data, index) => (
                         <div
                             key={index}
                             className="space-y-6 text-secondary-foreground/80"
                         >
                             <Image
                                 src={data.image?.file || ""}
-                                alt={data.name || ""}
+                                alt={data.title || ""}
                                 className="rounded-md w-full object-cover aspect-video"
                                 width={600}
                                 height={400}
                             />
                             <div className="">
-                                <h3 className="font-light text-2xl uppercase">{data.name}</h3>
-                                <p className="mb-2 font-normal uppercase">{new Date(Date.now()).toDateString()}</p>
-                                <p className="font-light">{data.bio}</p>
+                                <h3 className="font-light text-2xl uppercase">{data.title}</h3>
+                                <p className="mb-2 font-normal uppercase">{new Date(data?.date || Date.now()).toDateString()}</p>
+                                <p className="font-light">{data.shortDescription}</p>
                             </div>
 
 

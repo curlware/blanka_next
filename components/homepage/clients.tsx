@@ -9,6 +9,9 @@ type TProps = {
 
 export default function ClientSection({ data = {} }: TProps) {
   const { title, logos } = data
+
+  if (!logos?.length) return null
+
   return (
     <section
       id='Clients'
